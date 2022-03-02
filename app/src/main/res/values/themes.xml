@@ -15,4 +15,9 @@
     </style>
     <style name="OutlinedBox">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</style>
     <style name="OutlinedBoxDropdown">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu</style>
+
+    <style name="Theme.FullScreen" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+    </style>
 </resources>

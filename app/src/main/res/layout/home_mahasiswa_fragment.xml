@@ -24,10 +24,10 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="180dp"
                 android:orientation="horizontal"
-                android:padding="8dp"
-                android:src="@color/primary"
+                android:padding="16dp"
+                android:background="@color/primary"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
@@ -37,8 +37,10 @@
                     android:textColor="@color/black"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.3" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
@@ -55,9 +57,9 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="80dp"
+                android:layout_marginTop="140dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +155,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textInputLayout4"
                 style="@style/OutlinedBoxDropdown"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Pilih Semester"
@@ -163,11 +165,13 @@
                 <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:padding="8dp"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcMatakuliah"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"

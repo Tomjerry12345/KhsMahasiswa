@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textview.MaterialTextView
 import com.khsmahasiswa.R
 import com.khsmahasiswa.model.ModelUser
 
@@ -25,26 +27,19 @@ class UserAdapter(private val list: List<ModelUser>) : RecyclerView.Adapter<User
 }
 
 class UserHolder(val view: View) : RecyclerView.ViewHolder(view) {
-//    private val imgProduk = view.findViewById<AppCompatImageView>(R.id.imgProduk)
-
+    private val mtvNama = view.findViewById<MaterialTextView>(R.id.mtvNama)
+    private val btnEdit = view.findViewById<ImageButton>(R.id.btnEdit)
+    private val btnHapus = view.findViewById<ImageButton>(R.id.btnHapus)
 //    val dataUsers = SavedData.getDataUsers()
 
     @SuppressLint("SetTextI18n")
-    fun bindProduk(produk: ModelUser) {
+    fun bindProduk(user: ModelUser) {
+        mtvNama.text = user.nama
 //        Glide
 //            .with(view.context)
 //            .load(produk.image)
 //            .centerCrop()
 //            .into(imgProduk);
-//        mtvRating.text = "(${produk.rating!!})"
-//        ratingProduk.rating = produk.rating!!
-//        mtvNama.text = produk.kategori
-//        mtvHargaPerEkor.text = "Harga / ekor : Rp. ${produk.hargaPerEkor}"
-//        mtvHargaPerGompo.text = "Harga / gompo : Rp. ${produk.hargaPerGompo}"
-//        mtvHargaPerKg.text = "Harga / kg : Rp. ${produk.hargaPerKg}"
-//        mtvKecamatan.text = "${produk.kecamatan}"
-//        mtvKelurahan.text = "${produk.kelurahan}"
-//        mtvAlamat.text = "${produk.alamat}"
 //
 //        mbDetail.setOnClickListener {
 //            if (dataUsers?.jenisAkun == "Nelayan")

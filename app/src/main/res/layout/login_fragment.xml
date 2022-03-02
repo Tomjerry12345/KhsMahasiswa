@@ -28,7 +28,10 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
+            android:hint="@string/email"
+            android:layout_marginStart="@dimen/dimen16"
+            android:layout_marginEnd="@dimen/dimen16"
+            android:layout_gravity="center"
             android:layout_marginBottom="16dp"
             style="@style/OutlinedBox">
 
@@ -42,7 +45,9 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="@string/password"
+            android:layout_marginStart="@dimen/dimen16"
+            android:layout_marginEnd="@dimen/dimen16"
             android:layout_marginBottom="16dp"
             app:passwordToggleEnabled="true"
             style="@style/OutlinedBox">
@@ -58,10 +63,11 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Masuk"
+            android:text="@string/masuk"
+            android:layout_marginStart="@dimen/dimen16"
+            android:layout_marginEnd="@dimen/dimen16"
             android:onClick="@{(view) -> viewModel.onLogin(view)}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:layout_editor_absoluteX="8dp" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </layout>

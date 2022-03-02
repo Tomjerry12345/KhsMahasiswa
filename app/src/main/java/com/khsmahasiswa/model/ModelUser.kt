@@ -1,6 +1,7 @@
 package com.khsmahasiswa.model
 
 data class ModelUser(
-    val username: String,
-    val password: String
+    val username: String? = null,
+    val password: String? = null,
+    val nama: String? = null
 )
