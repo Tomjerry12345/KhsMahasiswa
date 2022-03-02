@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "942725821364",
+    "project_id": "khs-mahasiswa",
+    "storage_bucket": "khs-mahasiswa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942725821364:android:5414f99a43abc1daebf8e1",
+        "android_client_info": {
+          "package_name": "com.khsmahasiswa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "942725821364-7h2ct10hg6p0df49kljnk2jm4chqopse.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.khsmahasiswa",
+            "certificate_hash": "0af792e632193eb2c98faff46c34d97ba0f3ee09"
+          }
+        },
+        {
+          "client_id": "942725821364-iigfplvladf16crk7eg8mk2pjt7d10nf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBejK2yZmRYouYai5392ZCkUpv2MmxTMB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "942725821364-iigfplvladf16crk7eg8mk2pjt7d10nf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
