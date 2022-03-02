@@ -82,7 +82,7 @@ class FirebaseDatabase {
         }
     }
 
-    suspend fun login(path: String, username: String, password: String, msgSuccess: String, msgError: String): Response {
+    suspend fun login(path: String, username: String, password: String): Response {
         return try {
             val data = db.collection(path).whereEqualTo("username", username).get().await()
             var password1 = ""
@@ -92,7 +92,6 @@ class FirebaseDatabase {
                 Response.Error(
                     "Username tidak di temukan"
                 )
-
             } else {
                 // Check Password
                 for (i in data) {
@@ -106,8 +105,7 @@ class FirebaseDatabase {
                         val model = it.toObject(ExamplesModel::class.java)
                         SavedData.setObject(model)
                     }
-
-                    Response.Success("Sukses")
+                    Response.Success("sukses")
                 } else {
                     Response.Error("Password salah")
                 }
