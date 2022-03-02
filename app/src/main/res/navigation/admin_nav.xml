@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homeAdminFragment">
+
+    <fragment
+        android:id="@+id/homeAdminFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.home.HomeAdminFragment"
+        android:label="Home Admin"
+        tools:layout="@layout/home_admin_fragment"/>
+</navigation>

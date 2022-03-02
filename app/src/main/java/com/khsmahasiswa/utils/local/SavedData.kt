@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
-import com.khsmahasiswa.model.ExamplesModel
+import com.khsmahasiswa.model.examples.ExamplesModel
 import com.khsmahasiswa.utils.other.Constant
 
 object SavedData {

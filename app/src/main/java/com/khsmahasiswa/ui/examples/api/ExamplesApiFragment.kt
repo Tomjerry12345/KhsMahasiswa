@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.khsmahasiswa.R
 import com.khsmahasiswa.databinding.ExamplesApiFragmentBinding
-import com.khsmahasiswa.model.ExamplesApiModel
+import com.khsmahasiswa.model.examples.ExamplesApiModel
 import com.khsmahasiswa.repository.ExamplesApiRepository
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.showLogAssert

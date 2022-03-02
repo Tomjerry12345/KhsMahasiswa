@@ -2,7 +2,7 @@ package com.khsmahasiswa.database.firebase
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.khsmahasiswa.model.ExamplesModel
+import com.khsmahasiswa.model.examples.ExamplesModel
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.other.showLogAssert
@@ -99,15 +99,19 @@ class FirebaseDatabase {
                     showLogAssert("data", "${i["username"]}")
                 }
 
-                if (password1 == password) {
-                    data.forEach {
-                        showLogAssert("data", "${it.toObject(ExamplesModel::class.java)}")
-                        val model = it.toObject(ExamplesModel::class.java)
-                        SavedData.setObject(model)
-                    }
-                    Response.Success("sukses")
+                if (username == "admin" && password1 == password) {
+                    Response.Changed("")
                 } else {
-                    Response.Error("Password salah")
+                    if (password1 == password) {
+                        data.forEach {
+                            showLogAssert("data", "${it.toObject(ExamplesModel::class.java)}")
+                            val model = it.toObject(ExamplesModel::class.java)
+                            SavedData.setObject(model)
+                        }
+                        Response.Success("sukses")
+                    } else {
+                        Response.Error("Password salah")
+                    }
                 }
 
             }

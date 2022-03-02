@@ -3,7 +3,7 @@ package com.khsmahasiswa.ui.examples.firebase.crud
 import android.view.View
 import androidx.lifecycle.*
 import com.khsmahasiswa.database.firebase.FirebaseDatabase
-import com.khsmahasiswa.model.ExamplesModel
+import com.khsmahasiswa.model.examples.ExamplesModel
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.showLogAssert
 import kotlinx.coroutines.launch

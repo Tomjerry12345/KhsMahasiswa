@@ -1,6 +1,6 @@
 package com.khsmahasiswa.database.retrofit
 
-import com.khsmahasiswa.model.ExamplesApiModel
+import com.khsmahasiswa.model.examples.ExamplesApiModel
 import com.khsmahasiswa.utils.other.Constant.BASE_URL
 import okhttp3.MultipartBody
 import retrofit2.Retrofit

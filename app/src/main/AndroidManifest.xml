@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.khsmahasiswa">
+    package="com.khsmahasiswa" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -18,17 +18,25 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyBaseProjectAndroid"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m">
+        tools:targetApi="m" >
+        <activity
+            android:name=".ui.main.mahasiswa.MahasiswaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.admin.AdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.autentikasi.AutentikasiActivity"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- [START fcm_default_icon] -->
+        </activity> <!-- [START fcm_default_icon] -->
         <!--
  Set custom default icon. This is used when no icon is set for incoming notification messages.
              See README(https://goo.gl/l4GJaQ) for more.
@@ -49,13 +57,11 @@
             android:value="@string/default_notification_channel_id" /> <!-- [END fcm_default_channel] -->
         <activity
             android:name=".ui.examples.ExamplesActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
 
         <service
             android:name=".database.firebase.MyFirebaseMessagingService"
-            android:exported="false">
+            android:exported="false" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
