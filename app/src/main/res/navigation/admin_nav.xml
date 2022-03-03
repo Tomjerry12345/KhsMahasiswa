@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeAdminFragment_to_editUserFragment"
             app:destination="@id/editUserFragment" />
+        <action
+            android:id="@+id/action_homeAdminFragment_to_detailUserFragment"
+            app:destination="@id/detailUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/tambahUserFragment"
@@ -26,4 +29,9 @@
         android:id="@+id/editUserFragment"
         android:name="com.khsmahasiswa.ui.main.admin.edit.EditUserFragment"
         android:label="Edit User" />
+    <fragment
+        android:id="@+id/detailUserFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.detailUser.DetailUserFragment"
+        android:label="Detail User"
+        tools:layout="@layout/detail_user_admin_fragment"/>
 </navigation>
