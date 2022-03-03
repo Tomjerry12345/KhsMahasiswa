@@ -33,5 +33,13 @@
         android:id="@+id/detailUserFragment"
         android:name="com.khsmahasiswa.ui.main.admin.detailUser.DetailUserFragment"
         android:label="Detail User"
-        tools:layout="@layout/detail_user_admin_fragment"/>
+        tools:layout="@layout/detail_user_admin_fragment">
+        <action
+            android:id="@+id/action_detailUserFragment_to_tambahMatkulFragment"
+            app:destination="@id/tambahMatkulFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tambahMatkulFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.tambahMatkul.TambahMatkulFragment"
+        android:label="TambahMatkulFragment" />
 </navigation>
