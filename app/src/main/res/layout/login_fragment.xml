@@ -28,12 +28,12 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email"
+            android:hint="@string/nim"
             android:layout_marginStart="@dimen/dimen16"
             android:layout_marginEnd="@dimen/dimen16"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
-            style="@style/OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -50,7 +50,7 @@
             android:layout_marginEnd="@dimen/dimen16"
             android:layout_marginBottom="16dp"
             app:passwordToggleEnabled="true"
-            style="@style/OutlinedBox">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"

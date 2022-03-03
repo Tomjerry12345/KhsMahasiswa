@@ -43,6 +43,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_margin="8dp"
+            android:onClick="@{(view) -> viewModel.onTambahUser(view)}"
             android:contentDescription="Tambah user" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,10 +12,16 @@ class FirebaseDatabase {
 
     private val db = Firebase.firestore
 
-    suspend fun addData(path: String, data: Any): Response {
+    suspend fun addData(path: String, colection: String? = null, data: Any): Response {
         return try {
-            val response = db.collection(path).add(data).await()
-            Response.Changed(response.id)
+            if (colection.isNullOrEmpty()) {
+                val response = db.collection(path).add(data).await()
+                Response.Changed(response.id)
+            } else {
+                db.collection(path).document(colection).set(data)
+                Response.Success("Berhasil tambah data")
+            }
+
         } catch (e: Exception) {
             Response.Error("${e.message}")
         }
@@ -42,7 +48,7 @@ class FirebaseDatabase {
     suspend fun update(
         reference: String,
         colection: String,
-        update: String?,
+        update: String? = null,
         data: Any,
         msg: String = ""
     ): Response {
@@ -82,12 +88,12 @@ class FirebaseDatabase {
         }
     }
 
-    suspend fun login(path: String, username: String, password: String): Response {
+    suspend fun login(path: String, nim: String, password: String): Response {
         return try {
-            val data = db.collection(path).whereEqualTo("username", username).get().await()
+            val data = db.collection(path).whereEqualTo("nim", nim).get().await()
             var password1 = ""
 
-            // Check username
+            // Check nim
             if (data.isEmpty) {
                 Response.Error(
                     "Username tidak di temukan"
@@ -96,10 +102,9 @@ class FirebaseDatabase {
                 // Check Password
                 for (i in data) {
                     password1 = i["password"] as String
-                    showLogAssert("data", "${i["username"]}")
                 }
 
-                if (username == "admin" && password1 == password) {
+                if (nim == "001" && password1 == password) {
                     Response.Changed("")
                 } else {
                     if (password1 == password) {
@@ -130,6 +135,17 @@ class FirebaseDatabase {
             } else {
                 Response.Error("Username sudah terdaftar")
             }
+        } catch (e: Exception) {
+            Response.Error("${e.message}")
+        }
+
+    }
+
+    suspend fun checkTheSameData(path: String, key: String, data: Any): Response {
+        return try {
+            val response = db.collection(path).whereEqualTo(key, data).get().await()
+            showLogAssert("response checkTheSameData", "${response.isEmpty}")
+            Response.Changed(response.isEmpty)
         } catch (e: Exception) {
             Response.Error("${e.message}")
         }

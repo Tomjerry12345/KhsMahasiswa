@@ -22,8 +22,8 @@ class LoginViewModel(private val firebaseDatabase: FirebaseDatabase) : ViewModel
 
     fun onLogin(view: View) {
         try {
-            val email = checkEmpty(email.value)
-            val password = checkEmpty(password.value)
+            val email = checkEmpty(email.value, "Email tidak boleh kosong")
+            val password = checkEmpty(password.value, "Password tidak boleh kosong")
             val dialog = showDialog(view.context, "Sedang di proses")
             viewModelScope.launch {
                 response.value = firebaseDatabase.login("users", email, password)

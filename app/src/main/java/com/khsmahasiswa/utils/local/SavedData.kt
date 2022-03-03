@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.fragment.app.FragmentActivity
 import com.google.gson.Gson
-import com.khsmahasiswa.model.examples.ExamplesModel
+import com.khsmahasiswa.model.ModelUser
 import com.khsmahasiswa.utils.other.Constant
 
 object SavedData {
@@ -37,17 +37,17 @@ object SavedData {
         return sharedPref.getInt(Constant.examplesKeySavedDataString, 0)
     }
 
-    fun setObject(params: ExamplesModel) {
+    fun setObject(key: String, params: Any) {
         val json = gson.toJson(params)
         with (sharedPref.edit()) {
-            putString(Constant.examplesKeySavedDataObject, json)
+            putString(key, json)
             commit()
         }
 
     }
 
-    fun getObject(): ExamplesModel? {
-        val json: String? = sharedPref.getString(Constant.examplesKeySavedDataObject, "")
-        return gson.fromJson(json, ExamplesModel::class.java)
+    fun getObject(key: String, model: Any): Any? {
+        val json: String? = sharedPref.getString(key, "")
+        return gson.fromJson(json, model::class.java)
     }
 }

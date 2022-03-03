@@ -18,32 +18,32 @@ class ExamplesFirebaseCrudViewModel(private val firebaseDatabase: FirebaseDataba
     fun onAddDataFirebase(view: View) {
         val modelPertanyaan = ExamplesModel(examples = "examples")
         viewModelScope.launch {
-            when (val response: Response =
-                firebaseDatabase.addData("pertanyaan", modelPertanyaan)) {
-                is Response.Success -> {
-                }
-                is Response.Error -> {
-                    showLogAssert("error", response.error)
-                }
-
-                is Response.Changed -> {
-
-                    // Set Id From Database
-
-//                    val id = response.data
-//                    modelPertanyaan.id = id.toString()
-//                    firebaseDatabase.updateOneCollection(
-//                        "pertanyaan",
-//                        id.toString(),
-//                        null,
-//                        modelPertanyaan,
-//                        "sukses"
-//                    )
-
-                    // Move Fragment
-//                    view.findNavController().navigate(R.id.action_pertanyaanFragment_self)
-                }
-            }
+//            when (val response: Response =
+//                firebaseDatabase.addData("pertanyaan", modelPertanyaan)) {
+//                is Response.Success -> {
+//                }
+//                is Response.Error -> {
+//                    showLogAssert("error", response.error)
+//                }
+//
+//                is Response.Changed -> {
+//
+//                    // Set Id From Database
+//
+////                    val id = response.data
+////                    modelPertanyaan.id = id.toString()
+////                    firebaseDatabase.updateOneCollection(
+////                        "pertanyaan",
+////                        id.toString(),
+////                        null,
+////                        modelPertanyaan,
+////                        "sukses"
+////                    )
+//
+//                    // Move Fragment
+////                    view.findNavController().navigate(R.id.action_pertanyaanFragment_self)
+//                }
+//            }
         }
 
     }

@@ -9,5 +9,21 @@
         android:id="@+id/homeAdminFragment"
         android:name="com.khsmahasiswa.ui.main.admin.home.HomeAdminFragment"
         android:label="Home Admin"
-        tools:layout="@layout/home_admin_fragment"/>
+        tools:layout="@layout/home_admin_fragment">
+        <action
+            android:id="@+id/action_homeAdminFragment_to_tambahUserFragment"
+            app:destination="@id/tambahUserFragment" />
+        <action
+            android:id="@+id/action_homeAdminFragment_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tambahUserFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.tambahUser.TambahUserFragment"
+        android:label="Tambah User"
+        tools:layout="@layout/tambah_user_fragment" />
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.edit.EditUserFragment"
+        android:label="Edit User" />
 </navigation>
