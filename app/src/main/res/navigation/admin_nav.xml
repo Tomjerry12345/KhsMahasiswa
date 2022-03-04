@@ -28,18 +28,29 @@
     <fragment
         android:id="@+id/editUserFragment"
         android:name="com.khsmahasiswa.ui.main.admin.edit.EditUserFragment"
-        android:label="Edit User" />
+        android:label="Edit User"
+        tools:layout="@layout/edit_user_fragment"/>
     <fragment
         android:id="@+id/detailUserFragment"
         android:name="com.khsmahasiswa.ui.main.admin.detailUser.DetailUserFragment"
         android:label="Detail User"
         tools:layout="@layout/detail_user_admin_fragment">
         <action
-            android:id="@+id/action_detailUserFragment_to_tambahMatkulFragment"
+            android:id="@+id/action_detailUserFragment_to_detailMatkulFragment"
+            app:destination="@id/detailMatkulFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailMatkulFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.detailMatkul.DetailMatkulFragment"
+        android:label="Detail Matkul"
+        tools:layout="@layout/detail_matkul_fragment" >
+        <action
+            android:id="@+id/action_detailMatkulFragment_to_tambahMatkulFragment"
             app:destination="@id/tambahMatkulFragment" />
     </fragment>
     <fragment
         android:id="@+id/tambahMatkulFragment"
         android:name="com.khsmahasiswa.ui.main.admin.tambahMatkul.TambahMatkulFragment"
-        android:label="TambahMatkulFragment" />
+        android:label="Tambah Matkul"
+        tools:layout="@layout/tambah_matkul_fragment"/>
 </navigation>

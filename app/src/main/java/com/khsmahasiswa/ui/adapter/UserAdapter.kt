@@ -28,6 +28,7 @@ class UserAdapter(private val list: List<ModelUser>, val viewModel: Any, val key
     override fun onBindViewHolder(holder: UserHolder, position: Int) {
         holder.bindProduk(list[position], viewModel, key)
         holder.itemView.setOnClickListener {
+            SavedData.setObject(Constant.KEY_USER, list[position])
             moveNavigationTo(it, R.id.action_homeAdminFragment_to_detailUserFragment)
         }
     }
