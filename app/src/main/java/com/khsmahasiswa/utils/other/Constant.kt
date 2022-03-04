@@ -12,6 +12,7 @@ object Constant {
     const val examplesKeySavedDataObject = "examples"
 
     const val KEY_USER = "key-user"
+    const val KEY_USER_MATKUL = "key-user-matkul"
 
     const val KEY_VIEW_ADMIN = "key-view-admin"
 
@@ -20,4 +21,18 @@ object Constant {
 
     // list dropdown examples
     val exampleListDropwdownText = listOf("dropdown 1", "dropdown 2")
+
+    val listNilai = listOf(
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+    )
+
+    val listSemester = listOf(
+        "Semester 1",
+        "Semester 2",
+        "Semester 3"
+    )
 }

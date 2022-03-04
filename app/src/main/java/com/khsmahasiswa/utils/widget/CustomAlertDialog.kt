@@ -23,7 +23,7 @@ object CustomAlertDialog {
         val examplesInputDropdown = customAlertDialogView.findViewById<TextInputLayout>(R.id.examplesInputDropdown)
         val examplesDropdown = (examplesInputDropdown.editText as? AutoCompleteTextView)
 
-        val adapter = ArrayAdapter(context, R.layout.examples_custom_list_dropdown, Constant.exampleListDropwdownText)
+        val adapter = ArrayAdapter(context, R.layout.dropdown_custom_layout, Constant.exampleListDropwdownText)
 
         examplesDropdown?.setAdapter(adapter)
 

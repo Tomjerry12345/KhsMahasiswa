@@ -37,8 +37,6 @@ class HomeAdminFragment : Fragment(R.layout.home_admin_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        SavedData.init(requireActivity())
-
         val binding = HomeAdminFragmentBinding.bind(view)
         binding.viewModel = viewModel
 

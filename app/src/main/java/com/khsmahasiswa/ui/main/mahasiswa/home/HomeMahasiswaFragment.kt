@@ -21,13 +21,13 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
             matakuliah = "Algoritma pemrograman",
             namaDosen = "Pak syafar",
             nilai = "A+",
-            sks = "4"
+            sks = 4
         ),
         ModelMatakuliah(
             matakuliah = "Pemrograman testruktur",
             namaDosen = "Pak ridwan",
             nilai = "B+",
-            sks = "3"
+            sks = 3
         ),
     )
 

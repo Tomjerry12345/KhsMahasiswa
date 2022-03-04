@@ -45,6 +45,25 @@ class FirebaseDatabase {
         }
     }
 
+    suspend fun getDataSpecific(
+        reference: String,
+        key: String,
+        value: String
+    ): Response {
+        return try {
+            val data = db
+                .collection(reference)
+                .whereEqualTo(key, value)
+                .get()
+                .await()
+            Response.Changed(data)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
     suspend fun update(
         reference: String,
         colection: String,

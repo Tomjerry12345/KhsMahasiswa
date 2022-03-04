@@ -16,8 +16,6 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        SavedData.init(requireActivity())
-
         val binding = DetailUserAdminFragmentBinding.bind(view)
 
         binding.viewModel = viewModel
