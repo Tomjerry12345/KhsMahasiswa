@@ -15,8 +15,10 @@ import com.khsmahasiswa.model.ModelMatakuliah
 import com.khsmahasiswa.model.UserMatkul
 import com.khsmahasiswa.ui.adapter.NilaiMatkulAdapter
 import com.khsmahasiswa.ui.adapter.TambahNilaiMatkulAdapter
+import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
+import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.other.showToast
 
 class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
@@ -28,8 +30,14 @@ class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val dataUserMatkul = SavedData.getObject(Constant.KEY_USER_MATKUL, UserMatkul()) as UserMatkul
+
+        showLogAssert("dataUserMatkul", "$dataUserMatkul")
+
         val binding = TambahMatkulFragmentBinding.bind(view)
         binding.viewModel = viewModel
+
+        viewModel.dataUserMatkul = dataUserMatkul
 
         val dropdownNilai1 =  (binding.pilihSemester.editText as? AutoCompleteTextView)
         val nilaiAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_custom_layout, Constant.listSemester)

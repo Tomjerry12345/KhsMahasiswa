@@ -28,11 +28,7 @@ class TambahMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
     val listMatkul = ArrayList<ModelMatakuliah>()
 
     val user = SavedData.getObject(Constant.KEY_USER, ModelUser()) as ModelUser
-    val dataUserMatkul = SavedData.getObject(Constant.KEY_USER_MATKUL, UserMatkul()) as UserMatkul
-
-    init {
-        showLogAssert("dataUserMatkul", "$dataUserMatkul")
-    }
+    var dataUserMatkul: UserMatkul? = null
 
     @RequiresApi(Build.VERSION_CODES.N)
     fun tambahMatkul(matakuliah: ModelMatakuliah) {
@@ -72,7 +68,7 @@ class TambahMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
                     } else {
                         val list1 = ArrayList<ModelMatakuliah>()
 
-                        dataUserMatkul.matkul?.forEach {
+                        dataUserMatkul?.matkul?.forEach {
                             list1.add(it)
                         }
 
