@@ -47,6 +47,11 @@
         <action
             android:id="@+id/action_detailMatkulFragment_to_tambahMatkulFragment"
             app:destination="@id/tambahMatkulFragment" />
+        <action
+            android:id="@+id/action_detailMatkulFragment_self"
+            app:destination="@id/detailMatkulFragment"
+            app:popUpTo="@id/detailMatkulFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/tambahMatkulFragment"

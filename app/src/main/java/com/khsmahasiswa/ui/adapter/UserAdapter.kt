@@ -14,7 +14,7 @@ import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.other.Constant
 import com.khsmahasiswa.utils.system.moveNavigationTo
 
-class UserAdapter(private val list: List<ModelUser>, val viewModel: Any, val key: String) : RecyclerView.Adapter<UserHolder>() {
+class UserAdapter(private val list: List<ModelUser>, val viewModel: Any, private val key: String) : RecyclerView.Adapter<UserHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, p1: Int): UserHolder {
         return UserHolder(

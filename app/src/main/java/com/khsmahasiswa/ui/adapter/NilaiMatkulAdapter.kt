@@ -5,20 +5,20 @@ import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.textfield.TextInputLayout
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.khsmahasiswa.R
 import com.khsmahasiswa.model.ModelMatakuliah
-import com.khsmahasiswa.model.UserMatkul
-import com.khsmahasiswa.ui.main.admin.tambahMatkul.TambahMatkulViewModel
+import com.khsmahasiswa.ui.main.admin.detailMatkul.DetailMatkulViewModel
 import com.khsmahasiswa.utils.other.Constant
 
 class NilaiMatkulAdapter(
-    private val list: MutableList<ModelMatakuliah>
+    private val list: MutableList<ModelMatakuliah>,
+    val viewModel: ViewModel,
+    val key: String
 ) :
     RecyclerView.Adapter<NilaiMatkulHolder>() {
 
@@ -33,7 +33,7 @@ class NilaiMatkulAdapter(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: NilaiMatkulHolder, position: Int) {
-        holder.bindProduk(list[position])
+        holder.bindProduk(list[position], viewModel, key)
     }
 }
 
@@ -41,14 +41,22 @@ class NilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvNamaMatkul = view.findViewById<MaterialTextView>(R.id.mtvNamaMatkul)
     private val mtvSemester = view.findViewById<MaterialTextView>(R.id.mtvSemester)
     private val mtvNilai = view.findViewById<MaterialTextView>(R.id.mtvNilai)
+    private val mbHapus = view.findViewById<MaterialButton>(R.id.mbHapus)
 //    val dataUsers = SavedData.getDataUsers()
 
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
-    fun bindProduk(matakuliah: ModelMatakuliah) {
+    fun bindProduk(matakuliah: ModelMatakuliah, viewModel: ViewModel, key: String) {
         mtvNamaMatkul.text = matakuliah.matakuliah
         mtvSemester.text = "semester: ${matakuliah.semester}"
         mtvNilai.text = matakuliah.nilai
+
+        mbHapus.setOnClickListener {
+            if (key == Constant.KEY_VIEW_ADMIN) {
+                val viewModel1 = viewModel as DetailMatkulViewModel
+                viewModel1.onHapusUser(matakuliah.matakuliah, it.context)
+            }
+        }
 
 //        mtvNamaDosen.text = matakuliah.namaDosen
 //        mtvSks.text = "${matakuliah.sks} SKS"

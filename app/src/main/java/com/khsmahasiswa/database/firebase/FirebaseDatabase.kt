@@ -107,6 +107,21 @@ class FirebaseDatabase {
         }
     }
 
+    suspend fun deleteSpecific(reference: String, colection: String, msg: String): Response {
+        return try {
+            db.collection(reference)
+                .document(colection)
+                .delete()
+                .await()
+
+            Response.Success(msg)
+
+        } catch (e: Exception) {
+            showLogAssert("error", "${e.message}")
+            Response.Error("${e.message}")
+        }
+    }
+
     suspend fun login(path: String, nim: String, password: String): Response {
         return try {
             val data = db.collection(path).whereEqualTo("nim", nim).get().await()
