@@ -50,12 +50,10 @@ class TambahMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
                 matkul = list
             )
 
-
-
             when (val checkUser = firebaseDatabase.checkTheSameData("usersMatkul", "id", user.id.toString())) {
                 is Response.Changed -> {
                     val check = checkUser.data as Boolean
-                    if (check) {
+                    if (!check) {
                         when(val response1 = firebaseDatabase.addData("usersMatkul", null, userMatkul)) {
                             is Response.Changed -> {
                                 val id = response1.data as String
@@ -76,14 +74,16 @@ class TambahMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
                             list1.add(it)
                         }
 
-                        response.value = userMatkul.id?.let {
+                        showLogAssert("list1", "$list1")
+
+                        response.value = dataUserMatkul?.id?.let {
                             firebaseDatabase.update(
                                 "usersMatkul",
                                 it, "matkul", list1, "berhasil"
                             )
                         }
-
-                        showToast(view.context, "data sudah ada")
+//
+//                        showToast(view.context, "data sudah ada")
                     }
                 }
                 is Response.Error -> showToast(view.context, checkUser.error)

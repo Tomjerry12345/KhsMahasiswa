@@ -52,5 +52,12 @@
         android:id="@+id/tambahMatkulFragment"
         android:name="com.khsmahasiswa.ui.main.admin.tambahMatkul.TambahMatkulFragment"
         android:label="Tambah Matkul"
-        tools:layout="@layout/tambah_matkul_fragment"/>
+        tools:layout="@layout/tambah_matkul_fragment">
+        <action
+            android:id="@+id/action_tambahMatkulFragment_to_detailMatkulFragment"
+            app:destination="@id/detailMatkulFragment"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/detailMatkulFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

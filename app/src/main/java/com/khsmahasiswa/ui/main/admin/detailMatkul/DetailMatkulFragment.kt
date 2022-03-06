@@ -35,13 +35,19 @@ class DetailMatkulFragment : Fragment(R.layout.detail_matkul_fragment) {
                 is Response.Changed -> {
                     val querySnapshot = response.data as QuerySnapshot
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
-                    val userAdapter = NilaiMatkulAdapter(data[0].matkul as MutableList<ModelMatakuliah>)
-                    binding.rcMatakuliah.apply {
-                        layoutManager = LinearLayoutManager(requireContext())
-                        adapter = userAdapter
+
+                    showLogAssert("data", "${data.isEmpty()}")
+                    if (data.isNotEmpty()) {
+                        val userAdapter = NilaiMatkulAdapter(data[0].matkul as MutableList<ModelMatakuliah>)
+                        binding.rcMatakuliah.apply {
+                            layoutManager = LinearLayoutManager(requireContext())
+                            adapter = userAdapter
+                        }
+                        SavedData.setObject(Constant.KEY_USER_MATKUL, data[0])
+                    } else {
+                        SavedData.setObject(Constant.KEY_USER_MATKUL, UserMatkul())
                     }
 
-                    SavedData.setObject(Constant.KEY_USER_MATKUL, data[0])
                 }
                 is Response.Error -> showToast(requireContext(), response.error)
                 is Response.Success -> TODO()

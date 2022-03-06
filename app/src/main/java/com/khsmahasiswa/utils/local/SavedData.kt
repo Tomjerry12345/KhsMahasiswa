@@ -37,7 +37,7 @@ object SavedData {
         return sharedPref.getInt(Constant.examplesKeySavedDataString, 0)
     }
 
-    fun setObject(key: String, params: Any) {
+    fun setObject(key: String, params: Any?) {
         val json = gson.toJson(params)
         with (sharedPref.edit()) {
             putString(key, json)

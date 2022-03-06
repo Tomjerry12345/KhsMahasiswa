@@ -1,11 +1,14 @@
 package com.khsmahasiswa.ui.main.admin.tambahMatkul
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.QuerySnapshot
 import com.khsmahasiswa.R
@@ -20,6 +23,8 @@ import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
 import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.other.showToast
+import com.khsmahasiswa.utils.system.moveIntentTo
+import com.khsmahasiswa.utils.system.moveNavigationTo
 
 class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
 
@@ -27,6 +32,7 @@ class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
         TambahMatkulViewModel.Factory(FirebaseDatabase())
     }
 
+    @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,6 +59,14 @@ class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
                 is Response.Changed -> {
                     val querySnapshot = response.data as QuerySnapshot
                     val data = querySnapshot.toObjects(ModelMatakuliah::class.java)
+                    val matkul = dataUserMatkul.matkul
+                    if (matkul != null) {
+                        for (i in matkul) {
+                            data.removeIf {
+                                i.matakuliah == it.matakuliah
+                            }
+                        }
+                    }
                     val userAdapter = TambahNilaiMatkulAdapter(data, viewModel)
                     binding.rcMatakuliah.apply {
                         layoutManager = LinearLayoutManager(requireContext())
@@ -61,6 +75,15 @@ class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
                 }
                 is Response.Error -> showToast(requireContext(), response.error)
                 is Response.Success -> TODO()
+            }
+        }
+
+        viewModel.response.observe(viewLifecycleOwner) {
+            when(it) {
+                is Response.Changed -> TODO()
+                is Response.Error -> TODO()
+                is Response.Success ->
+                    moveNavigationTo(view, R.id.action_tambahMatkulFragment_to_detailMatkulFragment)
             }
         }
     }
