@@ -25,6 +25,10 @@ class DetailMatkulFragment : Fragment(R.layout.detail_matkul_fragment) {
         DetailMatkulViewModel.Factory(FirebaseDatabase())
     }
 
+    private var jumlahNilai = 0
+    private var jumlahSks = 0
+    private var sksXPoin = 0
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,22 +42,55 @@ class DetailMatkulFragment : Fragment(R.layout.detail_matkul_fragment) {
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
                     showLogAssert("data", "${data[0].matkul}")
                     if (data.isNotEmpty()) {
+                        val matkul = data[0].matkul
+
+                        matkul?.forEach {
+                            if (it.nilai == "A") {
+                                jumlahNilai += 4
+                                sksXPoin += it.sks?.toInt()?.times(4) ?: 0
+                            }
+                            else if (it.nilai == "B") {
+                                jumlahNilai += 3
+                                sksXPoin += it.sks?.toInt()?.times(3) ?: 0
+                            }
+                            else if (it.nilai == "C") {
+                                jumlahNilai += 2
+                                sksXPoin += it.sks?.toInt()?.times(2) ?: 0
+                            }
+                            else if (it.nilai == "D") {
+                                jumlahNilai += 1
+                                sksXPoin += it.sks?.toInt()?.times(4) ?: 0
+                            }
+                            else {
+                                jumlahNilai += 0
+                                sksXPoin += it.sks?.toInt()?.times(0) ?: 0
+                            }
+
+                            jumlahSks += it.sks!!
+                        }
+
+                        showLogAssert("jumlahNilai", jumlahNilai.toString())
+                        showLogAssert("jumlahSks", jumlahSks.toString())
+                        showLogAssert("sksXPoin", sksXPoin.toString())
+
+                        binding.jumlahSks.text = jumlahSks.toString()
+                        binding.ipSemester.text = (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
+
                         val userAdapter = NilaiMatkulAdapter(
-                            data[0].matkul as MutableList<ModelMatakuliah>,
+                            matkul as MutableList<ModelMatakuliah>,
                             viewModel,
                             Constant.KEY_VIEW_ADMIN
                         )
+
                         binding.rcMatakuliah.apply {
                             layoutManager = LinearLayoutManager(requireContext())
                             adapter = userAdapter
                         }
+
                         SavedData.setObject(
-                            Constant.KEY_USER_MATKUL, UserMatkul(
-                                id = data[0].id,
-                                idUser = data[0].idUser,
-                                matkul = data[0].matkul
-                            )
+                            Constant.KEY_USER_MATKUL, data[0]
                         )
+
                     } else {
                         SavedData.setObject(Constant.KEY_USER_MATKUL, UserMatkul())
                     }

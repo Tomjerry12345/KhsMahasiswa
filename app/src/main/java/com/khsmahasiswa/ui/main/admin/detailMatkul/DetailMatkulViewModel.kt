@@ -29,6 +29,9 @@ class DetailMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
 
     val response = MutableLiveData<Response>()
 
+    val jumlahNilai = MutableLiveData<String>()
+    val jumlahSks = MutableLiveData<String>()
+
     fun onTambahMatkul(view: View) {
         moveNavigationTo(view, R.id.action_detailMatkulFragment_to_tambahMatkulFragment)
     }
