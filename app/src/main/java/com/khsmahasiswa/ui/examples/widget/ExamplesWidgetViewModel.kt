@@ -16,8 +16,8 @@ class ExamplesWidgetViewModel : ViewModel() {
             .setPositiveButton(
                 "Add"
             ) { p0, p1 ->
-                showLogAssert("getInputTxt", CustomAlertDialog.getInputTxt)
-                showLogAssert("getInputDropdown", CustomAlertDialog.getInputDropdown)
+//                showLogAssert("getInputTxt", CustomAlertDialog.getInputTxt)
+//                showLogAssert("getInputDropdown", CustomAlertDialog.getInputDropdown)
             }
             .setNegativeButton("Cancel", null)
             .setView(CustomAlertDialog.getView(view.context))

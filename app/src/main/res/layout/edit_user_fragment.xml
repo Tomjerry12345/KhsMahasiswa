@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.khsmahasiswa.ui.main.admin.edit.EditUserViewModel" />
+            type="com.khsmahasiswa.ui.main.admin.editUser.EditUserViewModel" />
 
     </data>
 

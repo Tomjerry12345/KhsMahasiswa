@@ -1,4 +1,4 @@
-package com.khsmahasiswa.ui.main.admin.edit
+package com.khsmahasiswa.ui.main.admin.editUser
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -13,9 +13,7 @@ import com.khsmahasiswa.ui.main.admin.AdminActivity
 import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
-import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.other.showToast
-import com.khsmahasiswa.utils.system.moveIntentTo
 import com.khsmahasiswa.utils.system.moveIntentToFinish
 
 class EditUserFragment : Fragment(R.layout.edit_user_fragment) {

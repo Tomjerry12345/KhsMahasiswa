@@ -27,7 +27,7 @@
         tools:layout="@layout/tambah_user_fragment" />
     <fragment
         android:id="@+id/editUserFragment"
-        android:name="com.khsmahasiswa.ui.main.admin.edit.EditUserFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.editUser.EditUserFragment"
         android:label="Edit User"
         tools:layout="@layout/edit_user_fragment"/>
     <fragment

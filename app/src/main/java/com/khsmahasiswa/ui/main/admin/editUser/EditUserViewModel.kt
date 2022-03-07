@@ -1,4 +1,4 @@
-package com.khsmahasiswa.ui.main.admin.edit
+package com.khsmahasiswa.ui.main.admin.editUser
 
 import android.view.View
 import androidx.lifecycle.MutableLiveData

@@ -5,6 +5,7 @@ import android.os.Build
 import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.khsmahasiswa.R
 import com.khsmahasiswa.database.firebase.FirebaseDatabase
 import com.khsmahasiswa.model.ModelMatakuliah
@@ -12,10 +13,9 @@ import com.khsmahasiswa.model.ModelUser
 import com.khsmahasiswa.model.UserMatkul
 import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
-import com.khsmahasiswa.utils.other.Constant
-import com.khsmahasiswa.utils.other.showLogAssert
-import com.khsmahasiswa.utils.other.showMaterialDialog
+import com.khsmahasiswa.utils.other.*
 import com.khsmahasiswa.utils.system.moveNavigationTo
+import com.khsmahasiswa.utils.widget.CustomAlertDialog
 import kotlinx.coroutines.launch
 
 class DetailMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel() {
@@ -34,12 +34,47 @@ class DetailMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun onHapusUser(matakuliah: String?, context: Context) {
+    fun onEditMatkul(position: Int, context: Context) {
+        val dataUserMatkul = SavedData.getObject(Constant.KEY_USER_MATKUL, UserMatkul()) as UserMatkul
+        val userMatkul = dataUserMatkul.matkul
+        MaterialAlertDialogBuilder(context)
+            .setTitle("Pertanyaan")
+            .setPositiveButton(
+                "Add"
+            ) { p0, p1 ->
+                val dialog =  showDialog(context, "Sedang mengubah")
+                userMatkul?.get(position)?.nilai = CustomAlertDialog.getNilai
+                showLogAssert("findMatkul", userMatkul.toString())
+
+                viewModelScope.launch {
+                    val id = dataUserMatkul.id
+                    response.value = id?.let { id ->
+                        userMatkul?.let { matkul ->
+                            firebaseDatabase.update(
+                                "usersMatkul",
+                                id, "matkul", matkul, "berhasil"
+                            )
+                        }
+                    }
+
+                    dialog.dismiss()
+                }
+
+            }
+            .setNegativeButton("Cancel", null)
+            .setView(CustomAlertDialog.getView(context))
+            .show()
+
+    }
+
+    @RequiresApi(Build.VERSION_CODES.N)
+    fun onHapusMatkul(matakuliah: String?, context: Context) {
         val dataUserMatkul = SavedData.getObject(Constant.KEY_USER_MATKUL, UserMatkul()) as UserMatkul
         showMaterialDialog(context, "Apakah anda yakin ingin menghapus mahasiswa ini ?")
             .setPositiveButton("Iya") { dialog, witch ->
+                val dialog =  showDialog(context, "Sedang menghapus")
+
                 viewModelScope.launch {
-//                    response.value = firebaseDatabase.delete("users", id.toString(), "")
                     val id = dataUserMatkul.id
                     val listMatkul = dataUserMatkul.matkul as MutableList<ModelMatakuliah>
                     showLogAssert("beforelistMatkul", "$dataUserMatkul")
@@ -58,6 +93,8 @@ class DetailMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
                             )
                         }
                     }
+
+                    dialog.dismiss()
                 }
             }
             .show()

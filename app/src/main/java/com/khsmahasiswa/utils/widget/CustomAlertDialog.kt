@@ -12,26 +12,22 @@ import com.khsmahasiswa.utils.other.Constant
 
 object CustomAlertDialog {
 
-    var getInputTxt = ""
-    var getInputDropdown = ""
+    var getNilai = ""
 
     fun getView(context: Context): View? {
         val customAlertDialogView = LayoutInflater.from(context)
-            .inflate(R.layout.examples_custom_alert_dialog, null, false)
+            .inflate(R.layout.custom_alert_dialog, null, false)
 
-        val examplesInputTxt = customAlertDialogView.findViewById<TextInputEditText>(R.id.examplesInputTxt)
-        val examplesInputDropdown = customAlertDialogView.findViewById<TextInputLayout>(R.id.examplesInputDropdown)
-        val examplesDropdown = (examplesInputDropdown.editText as? AutoCompleteTextView)
+        val dropdownNilai = customAlertDialogView.findViewById<TextInputLayout>(R.id.dropdownNilai)
+        val dropdownNilai1 = (dropdownNilai.editText as? AutoCompleteTextView)
 
-        val adapter = ArrayAdapter(context, R.layout.dropdown_custom_layout, Constant.exampleListDropwdownText)
+        val adapter = ArrayAdapter(context, R.layout.dropdown_custom_layout, Constant.listNilai)
 
-        examplesDropdown?.setAdapter(adapter)
+        dropdownNilai1?.setAdapter(adapter)
 
-        getInputTxt = examplesInputTxt.text.toString()
-
-        examplesDropdown?.setOnItemClickListener { adapterView, view, i, l ->
+        dropdownNilai1?.setOnItemClickListener { adapterView, view, i, l ->
             val getItem = adapterView.getItemAtPosition(i)
-            getInputDropdown = (getItem as String?).toString()
+            getNilai = (getItem as String?).toString()
         }
         return customAlertDialogView
     }

@@ -33,7 +33,7 @@ class NilaiMatkulAdapter(
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: NilaiMatkulHolder, position: Int) {
-        holder.bindProduk(list[position], viewModel, key)
+        holder.bindProduk(list[position], viewModel, key, position)
     }
 }
 
@@ -42,19 +42,27 @@ class NilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvSemester = view.findViewById<MaterialTextView>(R.id.mtvSemester)
     private val mtvNilai = view.findViewById<MaterialTextView>(R.id.mtvNilai)
     private val mbHapus = view.findViewById<MaterialButton>(R.id.mbHapus)
+    private val mbEdit = view.findViewById<MaterialButton>(R.id.mbEdit)
 //    val dataUsers = SavedData.getDataUsers()
 
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("SetTextI18n")
-    fun bindProduk(matakuliah: ModelMatakuliah, viewModel: ViewModel, key: String) {
+    fun bindProduk(matakuliah: ModelMatakuliah, viewModel: ViewModel, key: String, position: Int) {
         mtvNamaMatkul.text = matakuliah.matakuliah
         mtvSemester.text = "semester: ${matakuliah.semester}"
         mtvNilai.text = matakuliah.nilai
 
+        mbEdit.setOnClickListener {
+            if (key == Constant.KEY_VIEW_ADMIN) {
+                val viewModel1 = viewModel as DetailMatkulViewModel
+                viewModel1.onEditMatkul(position, it.context)
+            }
+        }
+
         mbHapus.setOnClickListener {
             if (key == Constant.KEY_VIEW_ADMIN) {
                 val viewModel1 = viewModel as DetailMatkulViewModel
-                viewModel1.onHapusUser(matakuliah.matakuliah, it.context)
+                viewModel1.onHapusMatkul(matakuliah.matakuliah, it.context)
             }
         }
 
