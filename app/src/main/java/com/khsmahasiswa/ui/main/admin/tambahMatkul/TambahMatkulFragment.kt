@@ -8,7 +8,6 @@ import android.widget.AutoCompleteTextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.QuerySnapshot
 import com.khsmahasiswa.R
@@ -16,14 +15,11 @@ import com.khsmahasiswa.database.firebase.FirebaseDatabase
 import com.khsmahasiswa.databinding.TambahMatkulFragmentBinding
 import com.khsmahasiswa.model.ModelMatakuliah
 import com.khsmahasiswa.model.UserMatkul
-import com.khsmahasiswa.ui.adapter.NilaiMatkulAdapter
 import com.khsmahasiswa.ui.adapter.TambahNilaiMatkulAdapter
 import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
-import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.other.showToast
-import com.khsmahasiswa.utils.system.moveIntentTo
 import com.khsmahasiswa.utils.system.moveNavigationTo
 
 class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
@@ -32,46 +28,40 @@ class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
         TambahMatkulViewModel.Factory(FirebaseDatabase())
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    private lateinit var binding: TambahMatkulFragmentBinding
+
+    private lateinit var matkul: MutableList<ModelMatakuliah>
+
+    override @RequiresApi(Build.VERSION_CODES.N)
+    fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val dataUserMatkul =
+            SavedData.getObject(Constant.KEY_USER_MATKUL, UserMatkul()) as UserMatkul
 
-        val dataUserMatkul = SavedData.getObject(Constant.KEY_USER_MATKUL, UserMatkul()) as UserMatkul
-
-        showLogAssert("dataUserMatkul", "$dataUserMatkul")
-
-        val binding = TambahMatkulFragmentBinding.bind(view)
+        binding = TambahMatkulFragmentBinding.bind(view)
         binding.viewModel = viewModel
 
         viewModel.dataUserMatkul = dataUserMatkul
 
-        val dropdownNilai1 =  (binding.pilihSemester.editText as? AutoCompleteTextView)
-        val nilaiAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_custom_layout, Constant.listSemester)
-        dropdownNilai1?.setAdapter(nilaiAdapter)
-        dropdownNilai1?.setOnItemClickListener { adapterView, _, i, _ ->
-//            val getItem = adapterView.getItemAtPosition(i)
-//            matakuliah.nilai = getItem as String?
-//            viewModel.tambahMatkul(matakuliah)
-        }
-
         viewModel.data.observe(viewLifecycleOwner) { response ->
-            when(response) {
+            when (response) {
                 is Response.Changed -> {
                     val querySnapshot = response.data as QuerySnapshot
                     val data = querySnapshot.toObjects(ModelMatakuliah::class.java)
-                    val matkul = dataUserMatkul.matkul
-                    if (matkul != null) {
-                        for (i in matkul) {
+                    val userMatkul = dataUserMatkul.matkul
+                    if (userMatkul != null) {
+                        for (i in userMatkul) {
                             data.removeIf {
                                 i.matakuliah == it.matakuliah
                             }
                         }
+
+                        matkul = data
+
                     }
-                    val userAdapter = TambahNilaiMatkulAdapter(data, viewModel)
-                    binding.rcMatakuliah.apply {
-                        layoutManager = LinearLayoutManager(requireContext())
-                        adapter = userAdapter
-                    }
+
+                    //
+                    setData(data, "1")
                 }
                 is Response.Error -> showToast(requireContext(), response.error)
                 is Response.Success -> TODO()
@@ -79,12 +69,44 @@ class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
         }
 
         viewModel.response.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is Response.Changed -> TODO()
                 is Response.Error -> TODO()
                 is Response.Success ->
                     moveNavigationTo(view, R.id.action_tambahMatkulFragment_to_detailMatkulFragment)
             }
+        }
+
+        dropdownNilai()
+    }
+
+    fun dropdownNilai() {
+        val dropdownNilai1 = (binding.pilihSemester.editText as? AutoCompleteTextView)
+        val nilaiAdapter =
+            ArrayAdapter(requireContext(), R.layout.dropdown_custom_layout, Constant.listSemester)
+        binding.pilihSemester.editText?.setText(Constant.listSemester[0])
+        dropdownNilai1?.setAdapter(nilaiAdapter)
+        dropdownNilai1?.setOnItemClickListener { adapterView, _, i, _ ->
+            val getItem = adapterView.getItemAtPosition(i)
+            var semester = ""
+            when (getItem) {
+                Constant.listSemester[0] -> semester = "1"
+                Constant.listSemester[1] -> semester = "2"
+                Constant.listSemester[2] -> semester = "3"
+            }
+
+            setData(matkul, semester)
+        }
+    }
+
+    fun setData(matkul: MutableList<ModelMatakuliah>, semester: String) {
+        val matkulSemester = matkul.filter {
+            it.semester == semester
+        }
+        val userAdapter = TambahNilaiMatkulAdapter(matkulSemester, viewModel)
+        binding.rcMatakuliah.apply {
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = userAdapter
         }
     }
 
