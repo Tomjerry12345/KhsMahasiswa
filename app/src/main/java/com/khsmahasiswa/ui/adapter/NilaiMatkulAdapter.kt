@@ -55,7 +55,7 @@ class NilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mbEdit.setOnClickListener {
             if (key == Constant.KEY_VIEW_ADMIN) {
                 val viewModel1 = viewModel as DetailMatkulViewModel
-                viewModel1.onEditMatkul(position, it.context)
+                viewModel1.onEditMatkul(matakuliah.matakuliah, it.context)
             }
         }
 

@@ -37,17 +37,23 @@ class DetailMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
-    fun onEditMatkul(position: Int, context: Context) {
+    fun onEditMatkul(matakuliah: String?, context: Context) {
         val dataUserMatkul = SavedData.getObject(Constant.KEY_USER_MATKUL, UserMatkul()) as UserMatkul
         val userMatkul = dataUserMatkul.matkul
+
+        var position = 0
+
+        for (i in userMatkul?.indices!!) {
+            if (userMatkul[i].matakuliah == matakuliah) position = i
+        }
+
         MaterialAlertDialogBuilder(context)
             .setTitle("Pertanyaan")
             .setPositiveButton(
                 "Add"
             ) { p0, p1 ->
                 val dialog =  showDialog(context, "Sedang mengubah")
-                userMatkul?.get(position)?.nilai = CustomAlertDialog.getNilai
-                showLogAssert("findMatkul", userMatkul.toString())
+                userMatkul.get(position).nilai = CustomAlertDialog.getNilai
 
                 viewModelScope.launch {
                     val id = dataUserMatkul.id
@@ -57,7 +63,7 @@ class DetailMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
                                 "usersMatkul",
                                 id, "matkul", matkul, "berhasil"
                             )
-                        }
+                        }!!
                     }
 
                     dialog.dismiss()

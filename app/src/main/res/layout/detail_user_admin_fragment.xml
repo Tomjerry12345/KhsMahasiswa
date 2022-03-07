@@ -143,9 +143,10 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/ipKomulatif"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2.4"
+                            android:text="0"
                             android:textColor="@color/black"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -172,9 +173,10 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/jumlahSks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="24"
+                            android:text="0"
                             android:textColor="@color/black"
                             android:textSize="24sp"
                             android:textStyle="bold" />

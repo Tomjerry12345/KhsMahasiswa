@@ -1,16 +1,16 @@
 package com.khsmahasiswa.ui.main.admin.detailUser
 
 import android.view.View
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.khsmahasiswa.R
+import com.khsmahasiswa.database.firebase.FirebaseDatabase
 import com.khsmahasiswa.model.ModelUser
 import com.khsmahasiswa.utils.local.SavedData
+import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
 import com.khsmahasiswa.utils.system.moveNavigationTo
 
-class DetailUserViewModel(val savedData: SavedData) : ViewModel() {
+class DetailUserViewModel(val savedData: SavedData, val firebaseDatabase: FirebaseDatabase) : ViewModel() {
 
     val user = savedData.getObject(Constant.KEY_USER, ModelUser()) as ModelUser
 
@@ -21,15 +21,20 @@ class DetailUserViewModel(val savedData: SavedData) : ViewModel() {
     val namaIbu = MutableLiveData<String>(user.namaIbu)
     val noTeleponOrangTua = MutableLiveData<String>(user.noTeleponOrangtua)
 
+    val data: LiveData<Response> = liveData {
+        val response = firebaseDatabase.getDataSpecific("usersMatkul", "idUser", user.id.toString())
+        emit(response)
+    }
+
     fun onDetailMatkul(view: View) {
         moveNavigationTo(view, R.id.action_detailUserFragment_to_detailMatkulFragment)
     }
 
-    class Factory(private val savedData: SavedData) : ViewModelProvider.Factory {
+    class Factory(private val savedData: SavedData, val firebaseDatabase: FirebaseDatabase) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return DetailUserViewModel(savedData) as T
+            return DetailUserViewModel(savedData, firebaseDatabase) as T
         }
     }
 }
