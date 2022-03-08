@@ -1,7 +1,9 @@
 package com.khsmahasiswa.ui.examples.files.pdf
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.khsmahasiswa.R
 import com.khsmahasiswa.databinding.ExamplesPdfFragmentBinding
@@ -12,6 +14,7 @@ class ExamplesPdfFragment : Fragment(R.layout.examples_pdf_fragment) {
 
     private lateinit var viewModel: ExamplesPdfViewModel
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

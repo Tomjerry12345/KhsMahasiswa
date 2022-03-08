@@ -1,7 +1,9 @@
 package com.khsmahasiswa.ui.main.admin.detailUser
 
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.firestore.QuerySnapshot
@@ -13,6 +15,9 @@ import com.khsmahasiswa.model.UserMatkul
 import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.showLogAssert
+import com.khsmahasiswa.utils.other.showToast
+import com.khsmahasiswa.utils.system.DocumentUtils
+
 
 class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
 
@@ -26,6 +31,7 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
     private var jumlahSks = 0
     private var sksXPoin = 0
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = DetailUserAdminFragmentBinding.bind(view)
@@ -33,7 +39,7 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
         binding.viewModel = viewModel
 
         viewModel.data.observe(viewLifecycleOwner) {
-            when(it) {
+            when (it) {
                 is Response.Changed -> {
                     val querySnapshot = it.data as QuerySnapshot
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
@@ -51,8 +57,13 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
                 is Response.Success -> TODO()
             }
         }
+
+        binding.mbLapor.setOnClickListener {
+            testExportPdf()
+        }
+
     }
-    
+
     fun hitungIpk(matkul: List<ModelMatakuliah>?) {
         matkul?.forEach {
             if (it.nilai == "A") {
@@ -82,6 +93,25 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
         binding.jumlahSks.text = jumlahSks.toString()
         binding.ipKomulatif.text =
             (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun testExportPdf() {
+
+        val documentUtils = DocumentUtils(requireActivity())
+
+        val bitmap = documentUtils.createBitmapFromLayout(
+            binding.rootLayout,
+            binding.rootLayout.width,
+            binding.rootLayout.height
+        )
+        if (bitmap != null) {
+            documentUtils.createPdf(bitmap)
+        } else {
+            showToast(requireContext(), "Bitmap not found")
+        }
+
+
     }
 
 }

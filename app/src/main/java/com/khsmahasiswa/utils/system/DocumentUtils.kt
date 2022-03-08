@@ -9,6 +9,7 @@ import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.DocumentsContract
 import android.util.DisplayMetrics
 import android.view.View
@@ -17,12 +18,14 @@ import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import com.khsmahasiswa.utils.other.showToast
 import java.io.File
+import java.io.FileOutputStream
 import java.io.IOException
 
 
 class DocumentUtils(val activity: ComponentActivity) {
 
-    val targetPdf = "/sdcard/page.pdf"
+    val targetPath =
+        Environment.getExternalStorageDirectory().path + "/Download/ProgrammerWorld.pdf"
 
     fun createBitmapFromLayout(v: View, width: Int, height: Int): Bitmap? {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
@@ -55,16 +58,13 @@ class DocumentUtils(val activity: ComponentActivity) {
 
         pdfDocument.finishPage(page)
 
-        val file = File(targetPdf)
-
-
+        val file = File(targetPath)
 
         try {
-            createFile(Uri.fromFile(file))
-//            pdfDocument.writeTo(FileOutputStream(file))
+//            createFile(Uri.fromFile(file))
+            pdfDocument.writeTo(FileOutputStream(file))
         } catch (e: IOException) {
             e.printStackTrace()
-
             showToast(activity, "something wrong try again $e")
 
             // after close document
@@ -91,8 +91,7 @@ class DocumentUtils(val activity: ComponentActivity) {
     }
 
     fun openPdf() {
-        val file = File(targetPdf)
-
+        val file = File(targetPath)
         if (file.exists()) {
             val intent = Intent(Intent.ACTION_VIEW)
             val uri = Uri.fromFile(file)
@@ -105,6 +104,12 @@ class DocumentUtils(val activity: ComponentActivity) {
                 showToast(activity, "No application for pdf view")
             }
         }
+    }
+
+    fun testCreateDocumentAndroid11() {
+        val stringFilePath =
+            Environment.getExternalStorageDirectory().path + "/Download/ProgrammerWorld.pdf"
+        val file: File = File(stringFilePath)
     }
 
 }

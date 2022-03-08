@@ -12,6 +12,7 @@
     </data>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
@@ -195,8 +196,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Lihat detail Matkul"
                         android:onClick="@{(view) -> viewModel.onDetailMatkul(view)}"
+                        android:text="Lihat detail Matkul"
                         app:layout_constraintTop_toBottomOf="@+id/linearLayoutCompat4" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -291,7 +292,6 @@
                 android:layout_margin="16dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
                 tools:layout_editor_absoluteX="16dp">
 
@@ -319,6 +319,18 @@
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
             </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mbLapor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen16"
+                android:layout_marginBottom="@dimen/dimen16"
+                android:text="Laporkan ke orang tua"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView5"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView5"
+                app:layout_constraintTop_toBottomOf="@id/materialCardView5" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

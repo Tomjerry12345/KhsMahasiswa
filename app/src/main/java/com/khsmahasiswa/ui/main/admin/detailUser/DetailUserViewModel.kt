@@ -1,5 +1,6 @@
 package com.khsmahasiswa.ui.main.admin.detailUser
 
+import android.os.Environment
 import android.view.View
 import androidx.lifecycle.*
 import com.khsmahasiswa.R
@@ -9,6 +10,7 @@ import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
 import com.khsmahasiswa.utils.system.moveNavigationTo
+import java.io.File
 
 class DetailUserViewModel(val savedData: SavedData, val firebaseDatabase: FirebaseDatabase) : ViewModel() {
 
@@ -28,6 +30,10 @@ class DetailUserViewModel(val savedData: SavedData, val firebaseDatabase: Fireba
 
     fun onDetailMatkul(view: View) {
         moveNavigationTo(view, R.id.action_detailUserFragment_to_detailMatkulFragment)
+    }
+
+    fun onLaporkan(view: View) {
+
     }
 
     class Factory(private val savedData: SavedData, val firebaseDatabase: FirebaseDatabase) : ViewModelProvider.Factory {
