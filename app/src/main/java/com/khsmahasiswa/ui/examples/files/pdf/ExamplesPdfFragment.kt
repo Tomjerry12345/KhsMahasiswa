@@ -25,9 +25,13 @@ class ExamplesPdfFragment : Fragment(R.layout.examples_pdf_fragment) {
         binding.mbExportPdf.setOnClickListener {
             val documentUtils = DocumentUtils(requireActivity())
 
-            val bitmap = documentUtils.createBitmapFromLayout(linear, linear.width, linear.height)
+            val bitmap = documentUtils.createBitmapFromLayout(
+                linear,
+                linear.width,
+                linear.height
+            )
             if (bitmap != null) {
-                documentUtils.createPdf(bitmap)
+                documentUtils.createPdfFromBitmap(bitmap)
             } else {
                 showToast(requireContext(), "Bitmap not found")
             }

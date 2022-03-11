@@ -58,9 +58,9 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
             }
         }
 
-        binding.mbLapor.setOnClickListener {
-            testExportPdf()
-        }
+//        binding.mbLapor.setOnClickListener {
+//            testExportPdf()
+//        }
 
     }
 
@@ -95,23 +95,5 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
             (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun testExportPdf() {
-
-        val documentUtils = DocumentUtils(requireActivity())
-
-        val bitmap = documentUtils.createBitmapFromLayout(
-            binding.rootLayout,
-            binding.rootLayout.width,
-            binding.rootLayout.height
-        )
-        if (bitmap != null) {
-            documentUtils.createPdf(bitmap)
-        } else {
-            showToast(requireContext(), "Bitmap not found")
-        }
-
-
-    }
 
 }

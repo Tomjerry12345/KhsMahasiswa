@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_detailUserFragment_to_detailMatkulFragment"
             app:destination="@id/detailMatkulFragment" />
+        <action
+            android:id="@+id/action_detailUserFragment_to_viewNilaiFragment"
+            app:destination="@id/viewNilaiFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailMatkulFragment"
@@ -65,4 +68,9 @@
             app:popUpTo="@id/detailMatkulFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/viewNilaiFragment"
+        android:name="com.khsmahasiswa.ui.main.admin.viewNilai.ViewNilaiFragment"
+        android:label="View Nilai"
+        tools:layout="@layout/view_nilai_fragment"/>
 </navigation>

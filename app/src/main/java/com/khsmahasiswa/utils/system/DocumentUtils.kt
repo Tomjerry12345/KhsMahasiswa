@@ -16,6 +16,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.internal.ViewUtils.getContentView
 import com.khsmahasiswa.utils.other.showToast
 import java.io.File
 import java.io.FileOutputStream
@@ -34,8 +36,27 @@ class DocumentUtils(val activity: ComponentActivity) {
         return bitmap
     }
 
+    fun createBitmapRecyclerView(recyclerView: RecyclerView): Bitmap {
+        recyclerView.measure(
+            View.MeasureSpec.makeMeasureSpec(recyclerView.width, View.MeasureSpec.EXACTLY),
+            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+        )
+
+        recyclerView.layoutManager?.scrollToPosition(0)
+
+        val bitmap = Bitmap.createBitmap(
+            recyclerView.width,
+            recyclerView.measuredHeight,
+            Bitmap.Config.ARGB_8888
+        )
+
+        recyclerView.draw( Canvas(bitmap))
+
+        return bitmap
+    }
+
     @RequiresApi(Build.VERSION_CODES.O)
-    fun createPdf(bitmap: Bitmap) {
+    fun createPdfFromBitmap(bitmap: Bitmap) {
         val windowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val displayMetrics = DisplayMetrics()
         activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
@@ -63,14 +84,61 @@ class DocumentUtils(val activity: ComponentActivity) {
         try {
 //            createFile(Uri.fromFile(file))
             pdfDocument.writeTo(FileOutputStream(file))
+            showToast(activity, "succesfull download")
+//            openPdf()
         } catch (e: IOException) {
             e.printStackTrace()
             showToast(activity, "something wrong try again $e")
 
             // after close document
             pdfDocument.close()
+        }
+    }
+
+    fun createPdf() {
+        val path = Environment.getExternalStorageDirectory().path + "/" + Environment.DIRECTORY_DOCUMENTS
+//        val folder = File(path, "Khs Mahasiswa")
+//        if (!folder.exists()) {
+//            folder.mkdir()
+//        }
+
+        val pdfDocument = PdfDocument()
+
+        try {
+            val file = File(path, "sample.pdf")
+//            file.createNewFile()
+
+            val fOut = FileOutputStream(file)
+
+            val document = PdfDocument()
+            val pageInfo = PdfDocument.PageInfo.Builder(500, 1000, 1).create()
+            val page = document.startPage(pageInfo)
+
+            val canvas = page.canvas
+            val paint = Paint()
+
+            // draw something on the page
+            // draw something on the page
+
+
+            canvas.drawText("test", 10f, 10f, paint)
+            canvas.drawText("test 1", 10f, 20f, paint)
+            canvas.drawLine(1F, 30F, 30F, 30F, paint)
+
+            document.finishPage(page)
+            document.writeTo(fOut)
+            document.close()
+
+//            createFile(Uri.fromFile(file))
+//            pdfDocument.writeTo(FileOutputStream(file))
             showToast(activity, "succesfull download")
-            openPdf()
+//            openPdf()
+        } catch (e: IOException) {
+            e.printStackTrace()
+            showToast(activity, "something wrong try again $e")
+
+            // after close document
+            pdfDocument.close()
         }
     }
 

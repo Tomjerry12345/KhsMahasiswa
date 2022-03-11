@@ -33,7 +33,7 @@ class DetailUserViewModel(val savedData: SavedData, val firebaseDatabase: Fireba
     }
 
     fun onLaporkan(view: View) {
-
+        moveNavigationTo(view, R.id.action_detailUserFragment_to_viewNilaiFragment)
     }
 
     class Factory(private val savedData: SavedData, val firebaseDatabase: FirebaseDatabase) : ViewModelProvider.Factory {
