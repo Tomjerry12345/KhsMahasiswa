@@ -35,4 +35,6 @@ object Constant {
         "Semester 2",
         "Semester 3"
     )
+
+    val WHATSAPP_KEY = "com.whatsapp"
 }

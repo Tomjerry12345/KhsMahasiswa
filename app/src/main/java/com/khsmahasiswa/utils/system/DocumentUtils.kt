@@ -1,10 +1,12 @@
 package com.khsmahasiswa.utils.system
 
+import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import android.net.Uri
@@ -16,8 +18,12 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
+import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.internal.ViewUtils.getContentView
+import com.khsmahasiswa.BuildConfig
+import com.khsmahasiswa.R
+import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.other.showToast
 import java.io.File
 import java.io.FileOutputStream
@@ -26,8 +32,7 @@ import java.io.IOException
 
 class DocumentUtils(val activity: ComponentActivity) {
 
-    val targetPath =
-        Environment.getExternalStorageDirectory().path + "/Download/ProgrammerWorld.pdf"
+    val path = Environment.getExternalStorageDirectory().path + "/" + Environment.DIRECTORY_DOCUMENTS
 
     fun createBitmapFromLayout(v: View, width: Int, height: Int): Bitmap? {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
@@ -42,7 +47,7 @@ class DocumentUtils(val activity: ComponentActivity) {
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         )
 
-        recyclerView.layoutManager?.scrollToPosition(0)
+//        recyclerView.layoutManager?.scrollToPosition(0)
 
         val bitmap = Bitmap.createBitmap(
             recyclerView.width,
@@ -55,6 +60,7 @@ class DocumentUtils(val activity: ComponentActivity) {
         return bitmap
     }
 
+    @SuppressLint("ResourceAsColor")
     @RequiresApi(Build.VERSION_CODES.O)
     fun createPdfFromBitmap(bitmap: Bitmap) {
         val windowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -62,6 +68,9 @@ class DocumentUtils(val activity: ComponentActivity) {
         activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
         val height = displayMetrics.heightPixels
+
+        showLogAssert("width pdf", "$width")
+        showLogAssert("height pdf", "$height")
 
         val pdfDocument = PdfDocument()
         val pageInfo = PdfDocument.PageInfo.Builder(width, height, 1).create()
@@ -71,15 +80,19 @@ class DocumentUtils(val activity: ComponentActivity) {
 
         val paint = Paint()
 
-        canvas.drawPaint(paint)
+        canvas.drawColor(Color.WHITE)
 
-        val bitmapNew: Bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
+        canvas.drawBitmap(bitmap, 0F, 0F, paint)
 
-        canvas.drawBitmap(bitmapNew, 0.toFloat(), 0.toFloat(), null)
+
+//        canvas.drawPaint(paint)
+
+//        val bitmapNew: Bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
+
 
         pdfDocument.finishPage(page)
 
-        val file = File(targetPath)
+        val file = File(path, "Sample.pdf")
 
         try {
 //            createFile(Uri.fromFile(file))
@@ -159,7 +172,7 @@ class DocumentUtils(val activity: ComponentActivity) {
     }
 
     fun openPdf() {
-        val file = File(targetPath)
+        val file = File(path, "Sample.pdf")
         if (file.exists()) {
             val intent = Intent(Intent.ACTION_VIEW)
             val uri = Uri.fromFile(file)
@@ -178,6 +191,20 @@ class DocumentUtils(val activity: ComponentActivity) {
         val stringFilePath =
             Environment.getExternalStorageDirectory().path + "/Download/ProgrammerWorld.pdf"
         val file: File = File(stringFilePath)
+    }
+
+    fun shareFile(activity: ComponentActivity, noTeleponOrangtua: String? = null, key: String? = null) {
+        val file = File(path, "Sample.pdf")
+        val uri = FileProvider.getUriForFile(activity, BuildConfig.APPLICATION_ID + ".provider", file)
+        val share = Intent()
+        share.action = Intent.ACTION_SEND
+        share.putExtra(Intent.EXTRA_STREAM, uri)
+        if (noTeleponOrangtua != null)
+            share.putExtra("jid", "$noTeleponOrangtua@s.whatsapp.net")
+
+        share.setPackage(key)
+        share.type = "application/pdf"
+        activity.startActivity(share)
     }
 
 }
