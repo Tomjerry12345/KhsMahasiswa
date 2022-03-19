@@ -2,9 +2,11 @@ package com.khsmahasiswa.database.firebase
 
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.khsmahasiswa.model.ModelUser
 import com.khsmahasiswa.model.examples.ExamplesModel
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.local.SavedData
+import com.khsmahasiswa.utils.other.Constant
 import com.khsmahasiswa.utils.other.showLogAssert
 import kotlinx.coroutines.tasks.await
 
@@ -143,9 +145,9 @@ class FirebaseDatabase {
                 } else {
                     if (password1 == password) {
                         data.forEach {
-//                            showLogAssert("data", "${it.toObject(ExamplesModel::class.java)}")
-//                            val model = it.toObject(ExamplesModel::class.java)
-//                            SavedData.setObject(model)
+                            showLogAssert("data", "${it.toObject(ModelUser::class.java)}")
+                            val model = it.toObject(ModelUser::class.java)
+                            SavedData.setObject(Constant.KEY_USER,model)
                         }
                         Response.Success("sukses")
                     } else {

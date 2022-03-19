@@ -19,6 +19,7 @@ class LoginViewModel(private val firebaseDatabase: FirebaseDatabase) : ViewModel
     val password = MutableLiveData<String>()
 
     val response = MutableLiveData<Response>()
+    val users = MutableLiveData<Response>()
 
     fun onLogin(view: View) {
         try {

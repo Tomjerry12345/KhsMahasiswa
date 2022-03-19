@@ -1,15 +1,29 @@
 package com.khsmahasiswa.ui.main.mahasiswa.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.liveData
+import com.khsmahasiswa.database.firebase.FirebaseDatabase
+import com.khsmahasiswa.model.ModelUser
+import com.khsmahasiswa.utils.local.SavedData
+import com.khsmahasiswa.utils.network.Response
+import com.khsmahasiswa.utils.other.Constant
 
-class HomeMahasiswaViewModel : ViewModel() {
+class HomeMahasiswaViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel() {
 
-    class Factory() : ViewModelProvider.Factory {
+    val user = SavedData.getObject(Constant.KEY_USER, ModelUser()) as ModelUser
+
+    val data: LiveData<Response> = liveData {
+        val response = firebaseDatabase.getDataSpecific("usersMatkul", "idUser", user.id.toString())
+        emit(response)
+    }
+
+    class Factory(val firebaseDatabase: FirebaseDatabase) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return HomeMahasiswaViewModel() as T
+            return HomeMahasiswaViewModel(firebaseDatabase) as T
         }
     }
 
