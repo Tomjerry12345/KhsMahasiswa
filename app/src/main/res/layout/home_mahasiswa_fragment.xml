@@ -24,23 +24,25 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="150dp"
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:background="@color/primary"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvNamaUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:text="Hello, Nama Mahasiswa"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="22sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.3" />
+                    app:layout_constraintVertical_bias="0.293" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
@@ -50,6 +52,7 @@
                     android:src="@drawable/ic_baseline_person_24"
                     app:civ_border_color="#FF000000"
                     app:civ_border_width="2dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -59,7 +62,7 @@
                 android:id="@+id/materialCardView"
                 android:layout_width="330dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="140dp"
+                android:layout_marginTop="100dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -78,83 +81,98 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:orientation="vertical"
+                        app:layout_constraintEnd_toStartOf="@+id/view5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/ipSemester"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="24"
+                            android:textSize="24sp"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/mtvIpSemester"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SKS Semester" />
+                            android:text="IP Semester" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="100dp"
+                    <View
+                        android:id="@+id/view5"
+                        android:layout_width="1dp"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        app:layout_constraintEnd_toStartOf="@+id/linearLayoutCompat2"
-                        app:layout_constraintStart_toEndOf="@+id/linearLayoutCompat"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:gravity="center"
-                            android:text="24"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="SKS Semester" />
-
-                    </androidx.appcompat.widget.LinearLayoutCompat>
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="8dp" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:id="@+id/linearLayoutCompat2"
                         android:layout_width="100dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="end"
                         android:gravity="center"
                         android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/view5"
                         app:layout_constraintTop_toTopOf="parent">
 
                         <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/jumlahSks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:gravity="center"
                             android:text="24"
+                            android:textSize="24sp"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="SKS Semester" />
+                            android:text="SKS Tempuh" />
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
+
+<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
+<!--                        android:id="@+id/linearLayoutCompat2"-->
+<!--                        android:layout_width="100dp"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_gravity="end"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="vertical"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
+
+<!--                        <com.google.android.material.textview.MaterialTextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_gravity="center"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="24"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textStyle="bold" />-->
+
+<!--                        <com.google.android.material.textview.MaterialTextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="SKS Semester" />-->
+
+<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout4"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:id="@+id/dropdownSemester"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -178,7 +196,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/materialCardView"
                 app:layout_constraintStart_toStartOf="@+id/materialCardView"
-                app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+                app:layout_constraintTop_toBottomOf="@+id/dropdownSemester"
                 tools:listitem="@layout/item_matakuliah"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

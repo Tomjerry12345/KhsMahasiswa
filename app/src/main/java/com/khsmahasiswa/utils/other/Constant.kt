@@ -15,6 +15,7 @@ object Constant {
     const val KEY_USER_MATKUL = "key-user-matkul"
 
     const val KEY_VIEW_ADMIN = "key-view-admin"
+    const val KEY_VIEW_USER = "key-view-user"
 
     // retrofit base url
     const val BASE_URL = "http://192.168.1.16:4000/"
@@ -31,6 +32,13 @@ object Constant {
     )
 
     val listSemester = listOf(
+        "Semester 1",
+        "Semester 2",
+        "Semester 3"
+    )
+
+    val listSemesterUser = listOf(
+        "All",
         "Semester 1",
         "Semester 2",
         "Semester 3"

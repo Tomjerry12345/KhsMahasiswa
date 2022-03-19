@@ -52,6 +52,11 @@ class NilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvSemester.text = "semester: ${matakuliah.semester}"
         mtvNilai.text = matakuliah.nilai
 
+        if (key == Constant.KEY_VIEW_USER) {
+            mbEdit.visibility = View.GONE
+            mbHapus.visibility = View.GONE
+        }
+
         mbEdit.setOnClickListener {
             if (key == Constant.KEY_VIEW_ADMIN) {
                 val viewModel1 = viewModel as DetailMatkulViewModel
