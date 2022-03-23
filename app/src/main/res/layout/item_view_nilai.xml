@@ -32,7 +32,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/mtvMatakuliah"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:text="Matakuliah"
@@ -41,7 +41,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/mtvSks"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:text="Sks"
                 app:layout_constraintEnd_toStartOf="@+id/mtvNilai"
@@ -50,7 +50,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/mtvNilai"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="Nilai"

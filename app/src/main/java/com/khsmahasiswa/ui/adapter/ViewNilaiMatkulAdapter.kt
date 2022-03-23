@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import com.khsmahasiswa.R
 import com.khsmahasiswa.model.ModelMatakuliah
+import com.khsmahasiswa.utils.other.showLogAssert
 
 class ViewNilaiMatkulAdapter(val matkul: MutableList<ModelMatakuliah>) : RecyclerView.Adapter<ViewNilaiMatkulHolder>() {
 
@@ -18,10 +19,17 @@ class ViewNilaiMatkulAdapter(val matkul: MutableList<ModelMatakuliah>) : Recycle
         )
     }
 
-    override fun getItemCount(): Int = matkul.size
+    override fun getItemCount(): Int = matkul.size + 1
 
     override fun onBindViewHolder(holder: ViewNilaiMatkulHolder, position: Int) {
-        holder.bindProduk(position, matkul[position])
+        showLogAssert("position", "$position")
+        showLogAssert("size", "${matkul.size}")
+        if (position == matkul.size) {
+            holder.bindProduk(position, null, matkul.size)
+        } else {
+            holder.bindProduk(position, matkul[position], matkul.size)
+        }
+
     }
 }
 
@@ -33,12 +41,20 @@ class ViewNilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvNilai = view.findViewById<MaterialTextView>(R.id.mtvNilai)
 
     @SuppressLint("SetTextI18n")
-    fun bindProduk(position: Int, matkul: ModelMatakuliah) {
+    fun bindProduk(position: Int, matkul: ModelMatakuliah?, size: Int) {
         if (position > 0)
             mtvNama.visibility = View.GONE
 
-        mtvMatakuliah.text = matkul.matakuliah
-        mtvSks.text = matkul.sks.toString()
-        mtvNilai.text = matkul.nilai
+        if (matkul == null) {
+            mtvMatakuliah.text = "Total sks"
+            mtvSks.text = "100"
+            mtvNilai.text = ""
+        } else {
+            mtvMatakuliah.text = matkul.matakuliah
+            mtvSks.text = matkul.sks.toString()
+            mtvNilai.text = matkul.nilai
+        }
+
+
     }
 }

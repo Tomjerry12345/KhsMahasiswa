@@ -1,6 +1,7 @@
 package com.khsmahasiswa.ui.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -52,6 +53,13 @@ class NilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvSemester.text = "semester: ${matakuliah.semester}"
         mtvNilai.text = matakuliah.nilai
 
+        if (matakuliah.nilai == "D" || matakuliah.nilai == "E") {
+            view.setBackgroundColor(Color.RED)
+            mtvNamaMatkul.setTextColor(Color.WHITE)
+            mtvSemester.setTextColor(Color.WHITE)
+            mtvNilai.setTextColor(Color.WHITE)
+        }
+
         if (key == Constant.KEY_VIEW_USER) {
             mbEdit.visibility = View.GONE
             mbHapus.visibility = View.GONE
@@ -70,24 +78,6 @@ class NilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
                 viewModel1.onHapusMatkul(matakuliah.matakuliah, it.context)
             }
         }
-
-//        mtvNamaDosen.text = matakuliah.namaDosen
-//        mtvSks.text = "${matakuliah.sks} SKS"
-//        mtvNilai.text = matakuliah.nilai
-//        Glide
-//            .with(view.context)
-//            .load(produk.image)
-//            .centerCrop()
-//            .into(imgProduk);
-//
-//        mbDetail.setOnClickListener {
-//            if (dataUsers?.jenisAkun == "Nelayan")
-//                it.findNavController().navigate(R.id.action_homeNelayanFragment_to_detailProdukFragment)
-//            else
-//                it.findNavController().navigate(R.id.action_homePembeliFragment_to_detailProdukFragment2)
-//
-//            SavedData.saveDataProduk(produk)
-//        }
     }
 
 }

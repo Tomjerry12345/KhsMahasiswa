@@ -123,10 +123,6 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
             jumlahSks += it.sks!!
         }
 
-//        showLogAssert("jumlahNilai", jumlahNilai.toString())
-//        showLogAssert("jumlahSks", jumlahSks.toString())
-//        showLogAssert("sksXPoin", sksXPoin.toString())
-
 
         binding.jumlahSks.text = jumlahSks.toString()
         binding.ipSemester.text =
