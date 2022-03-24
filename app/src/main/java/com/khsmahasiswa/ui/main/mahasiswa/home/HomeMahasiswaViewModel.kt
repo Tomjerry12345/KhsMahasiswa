@@ -25,10 +25,6 @@ class HomeMahasiswaViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel
         emit(response)
     }
 
-    fun onClick(view: View) {
-
-    }
-
     fun showPopup(v: View) {
         val popup = PopupMenu(v.context, v)
         popup.menuInflater.inflate(R.menu.menu_mahasiswa, popup.menu)
