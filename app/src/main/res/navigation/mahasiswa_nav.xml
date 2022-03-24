@@ -9,5 +9,14 @@
         android:id="@+id/homeMahasiswaFragment"
         android:name="com.khsmahasiswa.ui.main.mahasiswa.home.HomeMahasiswaFragment"
         android:label="Home Mahasiswa"
-        tools:layout="@layout/home_mahasiswa_fragment"/>
+        tools:layout="@layout/home_mahasiswa_fragment">
+        <action
+            android:id="@+id/action_homeMahasiswaFragment_to_profilFragment"
+            app:destination="@id/profilFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilFragment"
+        android:name="com.khsmahasiswa.ui.main.mahasiswa.profil.ProfilFragment"
+        android:label="ProfilFragment"
+        tools:layout="@layout/profil_fragment"/>
 </navigation>

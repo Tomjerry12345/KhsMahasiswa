@@ -1,9 +1,13 @@
 package com.khsmahasiswa.ui.main.mahasiswa.home
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.appcompat.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +39,7 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+//        setHasOptionsMenu(true)
         binding = HomeMahasiswaFragmentBinding.bind(view)
         binding.viewModel = viewModel
 
@@ -61,16 +65,32 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
         dropdownNilai()
     }
 
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        inflater.inflate(R.menu.menu_mahasiswa, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+//    }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val id = item.itemId
+//
+//        showLogAssert("item id", id.toString())
+//        return super.onOptionsItemSelected(item)
+//    }
+
     private fun dropdownNilai() {
         val dropdownNilai1 = (binding.dropdownSemester.editText as? AutoCompleteTextView)
         val nilaiAdapter =
-            ArrayAdapter(requireContext(), R.layout.dropdown_custom_layout, Constant.listSemesterUser)
+            ArrayAdapter(
+                requireContext(),
+                R.layout.dropdown_custom_layout,
+                Constant.listSemesterUser
+            )
         binding.dropdownSemester.editText?.setText(Constant.listSemesterUser[0])
         dropdownNilai1?.setAdapter(nilaiAdapter)
         dropdownNilai1?.setOnItemClickListener { adapterView, _, i, _ ->
             val getItem = adapterView.getItemAtPosition(i)
             var semester = ""
-            when(getItem) {
+            when (getItem) {
                 Constant.listSemesterUser[0] -> semester = ""
                 Constant.listSemesterUser[1] -> semester = "1"
                 Constant.listSemesterUser[2] -> semester = "2"
@@ -82,6 +102,7 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
     }
 
     private fun setData(matkul: MutableList<ModelMatakuliah>, semester: String) {
+        var sksLulus = 0
         var jumlahSks = 0
         var jumlahNilai = 0
         var sksXPoin = 0
@@ -100,23 +121,26 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
             when (it.nilai) {
                 "A" -> {
                     jumlahNilai += 4
-                    sksXPoin += it.sks?.toInt()?.times(4) ?: 0
+                    sksXPoin += it.sks?.times(4) ?: 0
+                    sksLulus += it.sks!!
                 }
                 "B" -> {
                     jumlahNilai += 3
-                    sksXPoin += it.sks?.toInt()?.times(3) ?: 0
+                    sksXPoin += it.sks?.times(3) ?: 0
+                    sksLulus += it.sks!!
                 }
                 "C" -> {
                     jumlahNilai += 2
-                    sksXPoin += it.sks?.toInt()?.times(2) ?: 0
+                    sksXPoin += it.sks?.times(2) ?: 0
+                    sksLulus += it.sks!!
                 }
                 "D" -> {
                     jumlahNilai += 1
-                    sksXPoin += it.sks?.toInt()?.times(4) ?: 0
+                    sksXPoin += it.sks?.times(1) ?: 0
                 }
                 else -> {
                     jumlahNilai += 0
-                    sksXPoin += it.sks?.toInt()?.times(0) ?: 0
+                    sksXPoin += it.sks?.times(0) ?: 0
                 }
             }
 
@@ -124,7 +148,7 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
         }
 
 
-        binding.jumlahSks.text = jumlahSks.toString()
+        binding.jumlahSks.text = sksLulus.toString()
         binding.ipSemester.text =
             (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
 

@@ -1,40 +1,34 @@
-package com.khsmahasiswa.ui.main.admin.detailUser
+package com.khsmahasiswa.ui.main.mahasiswa.profil
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.firebase.firestore.QuerySnapshot
 import com.khsmahasiswa.R
 import com.khsmahasiswa.database.firebase.FirebaseDatabase
-import com.khsmahasiswa.databinding.DetailUserAdminFragmentBinding
+import com.khsmahasiswa.databinding.ProfilFragmentBinding
 import com.khsmahasiswa.model.ModelMatakuliah
 import com.khsmahasiswa.model.UserMatkul
-import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.showLogAssert
-import com.khsmahasiswa.utils.other.showToast
-import com.khsmahasiswa.utils.system.DocumentUtils
 
+class ProfilFragment : Fragment(R.layout.profil_fragment) {
 
-class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
-
-    private val viewModel: DetailUserViewModel by viewModels {
-        DetailUserViewModel.Factory(SavedData, FirebaseDatabase())
+    private val viewModel: ProfilViewModel by viewModels {
+        ProfilViewModel.Factory(FirebaseDatabase())
     }
 
-    private lateinit var binding: DetailUserAdminFragmentBinding
+    private lateinit var binding: ProfilFragmentBinding
 
     private var jumlahNilai = 0
     private var jumlahSks = 0
     private var sksXPoin = 0
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = DetailUserAdminFragmentBinding.bind(view)
+
+        binding = ProfilFragmentBinding.bind(view)
 
         binding.viewModel = viewModel
 
@@ -56,40 +50,32 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
                 is Response.Error -> showLogAssert("error", it.error)
                 is Response.Success -> TODO()
             }
-        }
 
-//        binding.mbLapor.setOnClickListener {
-//            testExportPdf()
-//        }
+
+        }
 
     }
 
     fun hitungIpk(matkul: List<ModelMatakuliah>?) {
         matkul?.forEach {
-            when (it.nilai) {
-                "A" -> {
-                    jumlahNilai += 4
-                    sksXPoin += it.sks?.times(4) ?: 0
-                    jumlahSks += it.sks!!
-                }
-                "B" -> {
-                    jumlahNilai += 3
-                    sksXPoin += it.sks?.times(3) ?: 0
-                    jumlahSks += it.sks!!
-                }
-                "C" -> {
-                    jumlahNilai += 2
-                    sksXPoin += it.sks?.times(2) ?: 0
-                    jumlahSks += it.sks!!
-                }
-                "D" -> {
-                    jumlahNilai += 1
-                    sksXPoin += it.sks?.times(1) ?: 0
-                }
-                else -> {
-                    jumlahNilai += 0
-                    sksXPoin += it.sks?.times(0) ?: 0
-                }
+            if (it.nilai == "A") {
+                jumlahNilai += 4
+                sksXPoin += it.sks?.times(4) ?: 0
+                jumlahSks += it.sks!!
+            } else if (it.nilai == "B") {
+                jumlahNilai += 3
+                sksXPoin += it.sks?.times(3) ?: 0
+                jumlahSks += it.sks!!
+            } else if (it.nilai == "C") {
+                jumlahNilai += 2
+                sksXPoin += it.sks?.times(2) ?: 0
+                jumlahSks += it.sks!!
+            } else if (it.nilai == "D") {
+                jumlahNilai += 1
+                sksXPoin += it.sks?.times(1) ?: 0
+            } else {
+                jumlahNilai += 0
+                sksXPoin += it.sks?.times(0) ?: 0
             }
         }
 
@@ -101,6 +87,5 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
         binding.ipKomulatif.text =
             (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
     }
-
 
 }
