@@ -45,7 +45,7 @@ class DetailMatkulFragment : Fragment(R.layout.detail_matkul_fragment) {
                 is Response.Changed -> {
                     val querySnapshot = response.data as QuerySnapshot
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
-                    showLogAssert("data", "${data[0].matkul}")
+//                    showLogAssert("data", "${data[0].matkul}")
                     if (data.isNotEmpty()) {
                         matkul = data[0].matkul as MutableList<ModelMatakuliah>
 //                        binding.dropdownSemester.editText?.setText("Semester 1")

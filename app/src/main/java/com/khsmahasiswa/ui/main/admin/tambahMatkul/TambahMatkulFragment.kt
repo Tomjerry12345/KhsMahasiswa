@@ -56,12 +56,13 @@ class TambahMatkulFragment : Fragment(R.layout.tambah_matkul_fragment) {
                             }
                         }
 
-                        matkul = data
-
                     }
 
-                    //
+                    matkul = data
+
                     setData(data, "1")
+
+                    //
                 }
                 is Response.Error -> showToast(requireContext(), response.error)
                 is Response.Success -> TODO()

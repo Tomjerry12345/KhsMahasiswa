@@ -43,7 +43,7 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
                 is Response.Changed -> {
                     val querySnapshot = it.data as QuerySnapshot
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
-                    showLogAssert("data", "${data[0].matkul}")
+//                    showLogAssert("data", "${data[0].matkul}")
 
                     if (data.isNotEmpty()) {
                         val matkul = data[0].matkul

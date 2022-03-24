@@ -50,10 +50,11 @@ class TambahMatkulViewModel(val firebaseDatabase: FirebaseDatabase) : ViewModel(
                 matkul = list
             )
 
-            when (val checkUser = firebaseDatabase.checkTheSameData("usersMatkul", "id", user.id.toString())) {
+            when (val checkUser = firebaseDatabase.checkTheSameData("usersMatkul", "idUser", user.id.toString())) {
                 is Response.Changed -> {
-                    val check = checkUser.data as Boolean
-                    if (!check) {
+                    val checkEmpty = checkUser.data as Boolean
+                    showLogAssert("check", "$checkEmpty")
+                    if (checkEmpty) {
                         when(val response1 = firebaseDatabase.addData("usersMatkul", null, userMatkul)) {
                             is Response.Changed -> {
                                 val id = response1.data as String
