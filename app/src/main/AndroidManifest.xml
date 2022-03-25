@@ -21,8 +21,7 @@
         tools:targetApi="m" >
         <activity
             android:name=".ui.main.mahasiswa.MahasiswaActivity"
-            android:exported="false"
-            android:theme="@style/Theme.FullScreen"/>
+            android:exported="false" />
         <activity
             android:name=".ui.main.admin.AdminActivity"
             android:exported="false" />

@@ -1,13 +1,10 @@
 package com.khsmahasiswa.ui.main.mahasiswa.home
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.appcompat.widget.PopupMenu
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,13 +19,13 @@ import com.khsmahasiswa.ui.adapter.NilaiMatkulAdapter
 import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
-import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.other.showToast
+
 
 class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
 
     private val viewModel: HomeMahasiswaViewModel by viewModels {
-        HomeMahasiswaViewModel.Factory(FirebaseDatabase())
+        HomeMahasiswaViewModel.Factory(FirebaseDatabase(), requireActivity())
     }
 
     val user = SavedData.getObject(Constant.KEY_USER, ModelUser()) as ModelUser
@@ -65,17 +62,15 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
         dropdownNilai()
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.menu_mahasiswa, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val id = item.itemId
-//
-//        showLogAssert("item id", id.toString())
-//        return super.onOptionsItemSelected(item)
-//    }
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
 
     private fun dropdownNilai() {
         val dropdownNilai1 = (binding.dropdownSemester.editText as? AutoCompleteTextView)

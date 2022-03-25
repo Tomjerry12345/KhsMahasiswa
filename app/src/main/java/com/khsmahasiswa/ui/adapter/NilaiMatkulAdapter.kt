@@ -1,20 +1,26 @@
 package com.khsmahasiswa.ui.adapter
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
+import android.text.SpannedString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textview.MaterialTextView
 import com.khsmahasiswa.R
 import com.khsmahasiswa.model.ModelMatakuliah
 import com.khsmahasiswa.ui.main.admin.detailMatkul.DetailMatkulViewModel
 import com.khsmahasiswa.utils.other.Constant
+import com.khsmahasiswa.utils.other.showLogAssert
 
 class NilaiMatkulAdapter(
     private val list: MutableList<ModelMatakuliah>,
@@ -78,6 +84,40 @@ class NilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
                 viewModel1.onHapusMatkul(matakuliah.matakuliah, it.context)
             }
         }
+
+        view.setOnClickListener {
+            onShowDialog(it.context, matakuliah)
+        }
     }
+
+    private fun onShowDialog(context: Context, matakuliah: ModelMatakuliah) {
+        showLogAssert("dialog", "true")
+
+        val items =
+            arrayOf(
+                formatterBoldString("Matkul: ", matakuliah.matakuliah),
+                formatterBoldString("Semester: ", matakuliah.semester),
+                formatterBoldString("Nilai: ", matakuliah.nilai),
+                formatterBoldString("SKS: ", matakuliah.sks.toString()),
+                formatterBoldString("Nama Dosen: ", matakuliah.namaDosen),
+            )
+
+        MaterialAlertDialogBuilder(context)
+            .setTitle("Data Matakuliah")
+            .setItems(items) { dialog, which ->
+                // Respond to item chosen
+            }
+            .show()
+    }
+
+    private fun formatterBoldString(title: String, value: String?): SpannedString {
+        return buildSpannedString {
+            append(title)
+            bold {
+                append("$value")
+            }
+        }
+    }
+
 
 }
