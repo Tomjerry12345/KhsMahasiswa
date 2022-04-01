@@ -20,19 +20,21 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white"
-            android:layout_marginBottom="32dp"
-            android:layout_marginTop="16dp"
+
             tools:listitem="@layout/item_view_nilai"/>
+
+<!--        android:layout_marginBottom="64dp"-->
+<!--        android:layout_marginTop="16dp"-->
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mbShare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_share_24"
             android:layout_margin="8dp"
+            android:contentDescription="Share pdf"
+            android:src="@drawable/ic_baseline_share_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:contentDescription="Share pdf" />
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -18,9 +18,9 @@
         tools:context="com.khsmahasiswa.ui.autentikasi.login.LoginFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:src="@color/primary_light"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/logo"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
             android:layout_marginBottom="32dp"/>

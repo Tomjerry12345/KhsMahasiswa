@@ -133,9 +133,10 @@ class DetailMatkulFragment : Fragment(R.layout.detail_matkul_fragment) {
         showLogAssert("jumlahSks", jumlahSks.toString())
         showLogAssert("sksXPoin", sksXPoin.toString())
 
+        val ipSemester = (sksXPoin.toFloat() / jumlahSks.toFloat())
+
         binding.jumlahSks.text = jumlahSks.toString()
-        binding.ipSemester.text =
-            (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
+        binding.ipSemester.text = String.format("%.2f", ipSemester)
 
         val userAdapter = NilaiMatkulAdapter(
             matkulSemester as MutableList<ModelMatakuliah>,

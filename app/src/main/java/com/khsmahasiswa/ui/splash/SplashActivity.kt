@@ -5,6 +5,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.Window
+import android.view.WindowManager
 import com.khsmahasiswa.R
 import com.khsmahasiswa.ui.autentikasi.AutentikasiActivity
 import com.khsmahasiswa.utils.system.moveIntentToFinish
@@ -16,6 +18,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         Handler().postDelayed({
             moveIntentToFinish(this, AutentikasiActivity())
-        }, 3000)
+        }, 2000)
     }
 }

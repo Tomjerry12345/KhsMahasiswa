@@ -14,15 +14,14 @@ import android.os.Build
 import android.os.Environment
 import android.provider.DocumentsContract
 import android.util.DisplayMetrics
+import android.util.LruCache
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.annotation.RequiresApi
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.internal.ViewUtils.getContentView
 import com.khsmahasiswa.BuildConfig
-import com.khsmahasiswa.R
 import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.other.showToast
 import java.io.File
@@ -47,7 +46,7 @@ class DocumentUtils(val activity: ComponentActivity) {
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
         )
 
-//        recyclerView.layoutManager?.scrollToPosition(0)
+        recyclerView.layoutManager?.scrollToPosition(0)
 
         val bitmap = Bitmap.createBitmap(
             recyclerView.width,
@@ -55,9 +54,58 @@ class DocumentUtils(val activity: ComponentActivity) {
             Bitmap.Config.ARGB_8888
         )
 
-        recyclerView.draw( Canvas(bitmap))
+        recyclerView.draw(Canvas(bitmap))
 
         return bitmap
+    }
+
+    fun getScreenshotFromRecyclerView(view: RecyclerView): Bitmap? {
+        val adapter = view.adapter
+        var bigBitmap: Bitmap? = null
+        if (adapter != null) {
+            val size = adapter.itemCount
+            var height = 0
+            val paint = Paint()
+            var iHeight = 0
+            val maxMemory = (Runtime.getRuntime().maxMemory() / 1024).toInt()
+
+            // Use 1/8th of the available memory for this memory cache.
+            val cacheSize = maxMemory / 8
+            val bitmaCache: LruCache<String, Bitmap> = LruCache(cacheSize)
+            for (i in 0 until size) {
+                val holder = adapter.createViewHolder(view, adapter.getItemViewType(i))
+                adapter.onBindViewHolder(holder, i)
+                holder.itemView.measure(
+                    View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.EXACTLY),
+                    View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+                )
+                holder.itemView.layout(
+                    0,
+                    0,
+                    holder.itemView.measuredWidth,
+                    holder.itemView.measuredHeight
+                )
+                holder.itemView.isDrawingCacheEnabled = true
+                holder.itemView.buildDrawingCache()
+                val drawingCache = holder.itemView.drawingCache
+                if (drawingCache != null) {
+                    bitmaCache.put(i.toString(), drawingCache)
+                }
+                //                holder.itemView.setDrawingCacheEnabled(false);
+//                holder.itemView.destroyDrawingCache();
+                height += holder.itemView.measuredHeight
+            }
+            bigBitmap = Bitmap.createBitmap(view.measuredWidth, height, Bitmap.Config.ARGB_8888)
+            val bigCanvas = Canvas(bigBitmap)
+            bigCanvas.drawColor(Color.WHITE)
+            for (i in 0 until size) {
+                val bitmap: Bitmap = bitmaCache.get(i.toString())
+                bigCanvas.drawBitmap(bitmap, 0f, iHeight.toFloat(), paint)
+                iHeight += bitmap.height
+                bitmap.recycle()
+            }
+        }
+        return bigBitmap
     }
 
     @SuppressLint("ResourceAsColor")
@@ -73,7 +121,7 @@ class DocumentUtils(val activity: ComponentActivity) {
         showLogAssert("height pdf", "$height")
 
         val pdfDocument = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(width, height, 1).create()
+        val pageInfo = PdfDocument.PageInfo.Builder(width, height, 2).create()
         val page = pdfDocument.startPage(pageInfo)
 
         val canvas = page.canvas
@@ -82,13 +130,14 @@ class DocumentUtils(val activity: ComponentActivity) {
 
         canvas.drawColor(Color.WHITE)
 
-        canvas.drawBitmap(bitmap, 0F, 0F, paint)
+//        canvas.drawBitmap(bitmap, 0F, 0F, paint)
 
 
-//        canvas.drawPaint(paint)
+        canvas.drawPaint(paint)
 
-//        val bitmapNew: Bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
+        val bitmapNew: Bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
 
+        canvas.drawBitmap(bitmapNew, 0F, 0F, paint)
 
         pdfDocument.finishPage(page)
 

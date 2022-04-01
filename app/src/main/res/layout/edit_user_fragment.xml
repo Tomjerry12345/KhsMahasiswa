@@ -84,13 +84,30 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtAngkatan"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Angkatan"
+                app:layout_constraintTop_toBottomOf="@+id/edtPassword"
+                tools:layout_editor_absoluteX="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.password}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtNoTelepon"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="No telepon"
-                app:layout_constraintTop_toBottomOf="@+id/edtPassword"
+                app:layout_constraintTop_toBottomOf="@+id/edtAngkatan"
                 tools:layout_editor_absoluteX="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -102,13 +119,30 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/edtAlamat"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Alamat sesuai KTP/SIM"
+                app:layout_constraintTop_toBottomOf="@+id/edtNoTelepon"
+                tools:layout_editor_absoluteX="16dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@={viewModel.alamat}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/edtNamaAyah"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:hint="Nama orang tua ayah"
-                app:layout_constraintTop_toBottomOf="@+id/edtNoTelepon"
+                app:layout_constraintTop_toBottomOf="@+id/edtAlamat"
                 tools:layout_editor_absoluteX="16dp">
 
                 <com.google.android.material.textfield.TextInputEditText

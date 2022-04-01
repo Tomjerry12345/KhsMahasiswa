@@ -40,7 +40,7 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
         binding = HomeMahasiswaFragmentBinding.bind(view)
         binding.viewModel = viewModel
 
-        binding.mtvNamaUser.text = "Hello, ${user.nama}"
+        binding.mtvNamaUser.text = user.nama
 
         viewModel.data.observe(viewLifecycleOwner) { response ->
             when (response) {
@@ -144,8 +144,7 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
 
 
         binding.jumlahSks.text = sksLulus.toString()
-        binding.ipSemester.text =
-            (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
+        binding.ipSemester.text = String.format("%.2f", (sksXPoin.toFloat() / jumlahSks.toFloat()))
 
         val homeMahasiswaAdapter = NilaiMatkulAdapter(
             matkulSemester as MutableList<ModelMatakuliah>,

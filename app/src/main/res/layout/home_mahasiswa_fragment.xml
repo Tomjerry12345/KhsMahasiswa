@@ -31,11 +31,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/mtvNamaUser"
+                    android:id="@+id/mtvHello"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Hello, Nama Mahasiswa"
+                    android:text="Hello,"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold"
@@ -43,6 +43,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.293" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/mtvNamaUser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Monkey D Luffy"
+                    android:textColor="@color/black"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@id/mtvHello"
+                    app:layout_constraintTop_toBottomOf="@id/mtvHello" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profile_image"
@@ -62,7 +73,7 @@
                 android:id="@+id/materialCardView"
                 android:layout_width="330dp"
                 android:layout_height="100dp"
-                android:layout_marginTop="100dp"
+                android:layout_marginTop="120dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
                 app:layout_constraintEnd_toEndOf="parent"

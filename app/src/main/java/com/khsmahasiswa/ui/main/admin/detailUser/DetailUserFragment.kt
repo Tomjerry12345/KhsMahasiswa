@@ -27,10 +27,6 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
 
     private lateinit var binding: DetailUserAdminFragmentBinding
 
-    private var jumlahNilai = 0
-    private var jumlahSks = 0
-    private var sksXPoin = 0
-
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,7 +39,7 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
                 is Response.Changed -> {
                     val querySnapshot = it.data as QuerySnapshot
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
-//                    showLogAssert("data", "${data[0].matkul}")
+                    showLogAssert("data", "${data[0].matkul}")
 
                     if (data.isNotEmpty()) {
                         val matkul = data[0].matkul
@@ -51,20 +47,18 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
 
                     }
 
-
                 }
                 is Response.Error -> showLogAssert("error", it.error)
                 is Response.Success -> TODO()
             }
         }
 
-//        binding.mbLapor.setOnClickListener {
-//            testExportPdf()
-//        }
-
     }
 
     fun hitungIpk(matkul: List<ModelMatakuliah>?) {
+        var jumlahNilai = 0
+        var jumlahSks = 0
+        var sksXPoin = 0
         matkul?.forEach {
             when (it.nilai) {
                 "A" -> {
@@ -101,6 +95,5 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
         binding.ipKomulatif.text =
             (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
     }
-
 
 }
