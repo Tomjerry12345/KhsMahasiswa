@@ -18,11 +18,11 @@
         tools:context="com.khsmahasiswa.ui.autentikasi.login.LoginFragment">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:background="@drawable/logo"
             android:layout_gravity="center"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="64dp"
             android:layout_marginBottom="32dp"/>
 
         <com.google.android.material.textfield.TextInputLayout

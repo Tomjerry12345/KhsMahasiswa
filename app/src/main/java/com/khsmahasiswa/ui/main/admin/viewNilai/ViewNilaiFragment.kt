@@ -91,7 +91,11 @@ class ViewNilaiFragment : Fragment(R.layout.view_nilai_fragment) {
 //        }
 
         bitmap?.let { documentUtils.createPdfFromBitmap(it) }
-        documentUtils.shareFile(requireActivity(), user.noTeleponOrangtua, Constant.WHATSAPP_KEY)
+//        user.noTeleponOrangtua?.let { showLogAssert("noTeleponOrangtua", it) }
+        documentUtils.shareFile(
+            requireActivity(),
+            user.noTeleponOrangtua, Constant.WHATSAPP_KEY
+        )
     }
 
     fun hitungIpk(matkul: List<ModelMatakuliah>?) {

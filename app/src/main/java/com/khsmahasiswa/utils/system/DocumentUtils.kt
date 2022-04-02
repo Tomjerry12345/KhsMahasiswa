@@ -248,8 +248,17 @@ class DocumentUtils(val activity: ComponentActivity) {
         val share = Intent()
         share.action = Intent.ACTION_SEND
         share.putExtra(Intent.EXTRA_STREAM, uri)
-        if (noTeleponOrangtua != null)
-            share.putExtra("jid", "$noTeleponOrangtua@s.whatsapp.net")
+        val getFirstNumber = noTeleponOrangtua?.get(0)
+//        noTeleponOrangtua?.get(0)?.let { showLogAssert("test", it.toString()) }
+        var numberFormat = ""
+        if (noTeleponOrangtua != null) {
+            if (getFirstNumber == '0') {
+                numberFormat = noTeleponOrangtua.drop(1)
+                numberFormat = "62$numberFormat"
+            }
+            showLogAssert("numberFormat", numberFormat)
+            share.putExtra("jid", "$numberFormat@s.whatsapp.net")
+        }
 
         share.setPackage(key)
         share.type = "application/pdf"
