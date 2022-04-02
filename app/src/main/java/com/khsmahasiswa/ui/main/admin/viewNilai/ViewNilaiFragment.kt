@@ -47,19 +47,19 @@ class ViewNilaiFragment : Fragment(R.layout.view_nilai_fragment) {
                 is Response.Changed -> {
                     val querySnapshot = it.data as QuerySnapshot
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
-                    val matkul = data[0].matkul as MutableList<ModelMatakuliah>
-                    showLogAssert("data", "$matkul")
+                    if (data.isNotEmpty()) {
+                        val matkul = data[0].matkul as MutableList<ModelMatakuliah>
+                        hitungIpk(matkul)
 
-                    hitungIpk(matkul)
-
-                    val viewNilaiMatkulAdapter =
-                        ViewNilaiMatkulAdapter(matkul, user, jumlahSks, ipk)
-                    binding.rcNilai.apply {
-                        layoutManager = LinearLayoutManager(requireContext())
-                        adapter = viewNilaiMatkulAdapter
+                        val viewNilaiMatkulAdapter =
+                            ViewNilaiMatkulAdapter(matkul, user, jumlahSks, ipk)
+                        binding.rcNilai.apply {
+                            layoutManager = LinearLayoutManager(requireContext())
+                            adapter = viewNilaiMatkulAdapter
+                        }
                     }
 
-
+//                    showLogAssert("data", "$matkul")
                 }
                 is Response.Error -> showLogAssert("error", it.error)
                 is Response.Success -> TODO()

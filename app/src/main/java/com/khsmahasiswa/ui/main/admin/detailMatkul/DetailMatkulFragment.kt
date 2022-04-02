@@ -77,7 +77,7 @@ class DetailMatkulFragment : Fragment(R.layout.detail_matkul_fragment) {
 
     }
 
-    fun dropdownNilai() {
+    private fun dropdownNilai() {
         val dropdownNilai1 = (binding.dropdownSemester.editText as? AutoCompleteTextView)
         val nilaiAdapter =
             ArrayAdapter(requireContext(), R.layout.dropdown_custom_layout, Constant.listSemester)
@@ -92,15 +92,13 @@ class DetailMatkulFragment : Fragment(R.layout.detail_matkul_fragment) {
                 Constant.listSemester[2] -> semester = "3"
             }
 
-            setData(matkul, semester)
-
-//            moveNavigationTo(requireView(), R.id.action_detailMatkulFragment_self)
-//            matakuliah.nilai = getItem as String?
-//            viewModel.tambahMatkul(matakuliah)
+            if (::matkul.isInitialized) {
+                setData(matkul, semester)
+            }
         }
     }
 
-    fun setData(matkul: MutableList<ModelMatakuliah>, semester: String) {
+    private fun setData(matkul: MutableList<ModelMatakuliah>, semester: String) {
         jumlahSks = 0
         jumlahNilai = 0
         sksXPoin = 0

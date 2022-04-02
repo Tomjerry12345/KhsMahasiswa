@@ -92,7 +92,10 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
                 Constant.listSemesterUser[3] -> semester = "3"
             }
 
-            setData(matkul, semester)
+            if (::matkul.isInitialized) {
+                setData(matkul, semester)
+            }
+
         }
     }
 
