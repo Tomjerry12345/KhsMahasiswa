@@ -54,7 +54,7 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
 
     }
 
-    fun hitungIpk(matkul: List<ModelMatakuliah>?) {
+    private fun hitungIpk(matkul: List<ModelMatakuliah>?) {
         var jumlahNilai = 0
         var jumlahSks = 0
         var sksXPoin = 0
@@ -86,13 +86,8 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
             }
         }
 
-        showLogAssert("jumlahNilai", jumlahNilai.toString())
-        showLogAssert("jumlahSks", jumlahSks.toString())
-        showLogAssert("sksXPoin", sksXPoin.toString())
-
         binding.jumlahSks.text = jumlahSks.toString()
-        binding.ipKomulatif.text =
-            (sksXPoin.toFloat() / jumlahSks.toFloat()).toString()
+        binding.ipKomulatif.text = String.format("%.2f", sksXPoin.toFloat() / jumlahSks.toFloat())
     }
 
 }
