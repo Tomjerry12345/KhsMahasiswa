@@ -33,6 +33,17 @@
         <entry key="..\:/Users/Andi/3D Objects/luffy-dev/android/MyBaseProjectAndroid/app/src/main/res/layout/examples_activity.xml" value="0.1" />
         <entry key="..\:/Users/Andi/3D Objects/luffy-dev/android/MyBaseProjectAndroid/app/src/main/res/layout/examples_fragment.xml" value="0.22" />
         <entry key="..\:/Users/Andi/3D Objects/luffy-dev/android/MyBaseProjectAndroid/app/src/main/res/layout/login_fragment.xml" value="0.17" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/activity_admin.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/activity_mahasiswa.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/detail_matkul_fragment.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/detail_user_admin_fragment.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/dropdown_custom_layout.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/home_mahasiswa_fragment.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/item_matakuliah.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/item_nilai_matkul.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/item_tambah_nilai_matkul.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/layout/login_fragment.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MSI GL63/AndroidStudioProjects/KhsMahasiswa/app/src/main/res/menu/menu_mahasiswa.xml" value="0.25416666666666665" />
         <entry key="..\:/luffy-dev/Project/Android/KhsMahasiswa/app/src/main/res/layout/activity_mahasiswa.xml" value="0.1" />
         <entry key="..\:/luffy-dev/Project/Android/KhsMahasiswa/app/src/main/res/layout/activity_splash.xml" value="0.16666666666666666" />
         <entry key="..\:/luffy-dev/Project/Android/KhsMahasiswa/app/src/main/res/layout/detail_matkul_fragment.xml" value="0.3333333333333333" />
@@ -53,7 +64,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -103,7 +103,7 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
         var sksLulus = 0
         var jumlahSks = 0
         var jumlahNilai = 0
-        var sksXPoin = 0
+        var sksXPoin = 0F
         var matkulSemester: List<ModelMatakuliah> = if (semester == "") {
             binding.mtvIpSemester.text = "IP Komulatif"
             matkul
@@ -122,14 +122,39 @@ class HomeMahasiswaFragment : Fragment(R.layout.home_mahasiswa_fragment) {
                     sksXPoin += it.sks?.times(4) ?: 0
                     sksLulus += it.sks!!
                 }
+                "A-" -> {
+                    jumlahNilai += 4
+                    sksXPoin += (it.sks?.times(3.7F) ?:  0) as Float
+                    sksLulus += it.sks!!
+                }
+                "B+" -> {
+                    jumlahNilai += 4
+                    sksXPoin += (it.sks?.times(3.3F) ?:  0) as Float
+                    sksLulus += it.sks!!
+                }
                 "B" -> {
                     jumlahNilai += 3
                     sksXPoin += it.sks?.times(3) ?: 0
                     sksLulus += it.sks!!
                 }
+                "B-" -> {
+                    jumlahNilai += 4
+                    sksXPoin += (it.sks?.times(2.7F) ?:  0) as Float
+                    sksLulus += it.sks!!
+                }
+                "C+" -> {
+                    jumlahNilai += 4
+                    sksXPoin += (it.sks?.times(2.3F) ?:  0) as Float
+                    sksLulus += it.sks!!
+                }
                 "C" -> {
                     jumlahNilai += 2
                     sksXPoin += it.sks?.times(2) ?: 0
+                    sksLulus += it.sks!!
+                }
+                "C-" -> {
+                    jumlahNilai += 4
+                    sksXPoin += (it.sks?.times(1.7F) ?:  0) as Float
                     sksLulus += it.sks!!
                 }
                 "D" -> {

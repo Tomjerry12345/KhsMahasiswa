@@ -25,8 +25,13 @@ object Constant {
 
     val listNilai = listOf(
         "A",
+        "A-",
+        "B+",
         "B",
+        "B-",
+        "C+",
         "C",
+        "C-",
         "D",
         "E",
     )
