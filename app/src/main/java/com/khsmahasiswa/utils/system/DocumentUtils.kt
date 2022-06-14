@@ -31,7 +31,8 @@ import java.io.IOException
 
 class DocumentUtils(val activity: ComponentActivity) {
 
-    val path = Environment.getExternalStorageDirectory().path + "/" + Environment.DIRECTORY_DOCUMENTS
+//    val path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+    val path = activity.getExternalFilesDir(null)
 
     fun createBitmapFromLayout(v: View, width: Int, height: Int): Bitmap? {
         val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)

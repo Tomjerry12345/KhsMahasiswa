@@ -72,5 +72,11 @@
         android:id="@+id/viewNilaiFragment"
         android:name="com.khsmahasiswa.ui.main.admin.viewNilai.ViewNilaiFragment"
         android:label="View Nilai"
-        tools:layout="@layout/view_nilai_fragment"/>
+        tools:layout="@layout/view_nilai_fragment">
+        <action
+            android:id="@+id/action_viewNilaiFragment_to_detailUserFragment"
+            app:destination="@id/detailUserFragment"
+            app:popUpTo="@id/viewNilaiFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

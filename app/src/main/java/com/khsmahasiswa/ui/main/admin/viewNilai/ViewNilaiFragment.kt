@@ -1,9 +1,13 @@
 package com.khsmahasiswa.ui.main.admin.viewNilai
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +24,7 @@ import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.Constant
 import com.khsmahasiswa.utils.other.showLogAssert
 import com.khsmahasiswa.utils.system.DocumentUtils
+import com.khsmahasiswa.utils.system.moveNavigationTo
 
 class ViewNilaiFragment : Fragment(R.layout.view_nilai_fragment) {
 
@@ -36,11 +41,30 @@ class ViewNilaiFragment : Fragment(R.layout.view_nilai_fragment) {
     var sksXPoin = 0
     var ipk = ""
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                // Permission is granted. Continue the action or workflow in your
+                // app.
+            } else {
+                // Explain to the user that the feature is unavailable because the
+                // features requires a permission that the user has denied. At the
+                // same time, respect the user's decision. Don't link to system
+                // settings in an effort to convince the user to change their
+                // decision.
+//                moveNavigationTo(requireView(), R.id.action_viewNilaiFragment_to_detailUserFragment)
+            }
+        }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = ViewNilaiFragmentBinding.bind(view)
+
+//        permission()
 
         viewModel.data.observe(viewLifecycleOwner) {
             when (it) {
@@ -68,6 +92,27 @@ class ViewNilaiFragment : Fragment(R.layout.view_nilai_fragment) {
 
         binding.mbShare.setOnClickListener {
             testExportPdf()
+        }
+    }
+
+    private fun permission() {
+        when (PackageManager.PERMISSION_GRANTED) {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) -> {
+                // You can use the API that requires the permission.
+            }
+            else -> {
+                // You can directly ask for the permission.
+                // The registered ActivityResultCallback gets the result of this request.
+                requestPermissionLauncher.launch(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+    //                requestPermissionLauncher.launch(
+    //                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+    //                )
+            }
         }
     }
 
