@@ -1,8 +1,10 @@
 package com.khsmahasiswa.ui.main.admin.detailUser
 
+import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,17 +17,27 @@ import com.khsmahasiswa.model.UserMatkul
 import com.khsmahasiswa.utils.local.SavedData
 import com.khsmahasiswa.utils.network.Response
 import com.khsmahasiswa.utils.other.showLogAssert
-import com.khsmahasiswa.utils.other.showToast
-import com.khsmahasiswa.utils.system.DocumentUtils
 
 
 class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
 
     private val viewModel: DetailUserViewModel by viewModels {
-        DetailUserViewModel.Factory(SavedData, FirebaseDatabase())
+        DetailUserViewModel.Factory(SavedData, FirebaseDatabase(), requireActivity())
     }
 
     private lateinit var binding: DetailUserAdminFragmentBinding
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                binding.mbLapor.isEnabled = true
+            } else {
+                binding.mbLapor.isEnabled = false
+            }
+        }
+
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,6 +45,8 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
         binding = DetailUserAdminFragmentBinding.bind(view)
 
         binding.viewModel = viewModel
+
+        requestPermissionLauncher.launch(Manifest.permission.SEND_SMS)
 
         viewModel.data.observe(viewLifecycleOwner) {
             when (it) {
@@ -58,6 +72,9 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
         var jumlahNilai = 0
         var jumlahSks = 0
         var sksXPoin = 0
+
+        var isNilaiError = false
+
         matkul?.forEach {
             when (it.nilai) {
                 "A" -> {
@@ -82,12 +99,15 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
                 else -> {
                     jumlahNilai += 0
                     sksXPoin += it.sks?.times(0) ?: 0
+                    isNilaiError = true
                 }
             }
         }
 
         binding.jumlahSks.text = jumlahSks.toString()
         binding.ipKomulatif.text = String.format("%.2f", sksXPoin.toFloat() / jumlahSks.toFloat())
+
+        binding.mbLapor.isEnabled = isNilaiError
     }
 
 }
