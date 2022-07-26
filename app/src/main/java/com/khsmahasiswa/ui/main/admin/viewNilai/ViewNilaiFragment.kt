@@ -73,10 +73,19 @@ class ViewNilaiFragment : Fragment(R.layout.view_nilai_fragment) {
                     val data = querySnapshot.toObjects(UserMatkul::class.java)
                     if (data.isNotEmpty()) {
                         val matkul = data[0].matkul as MutableList<ModelMatakuliah>
-                        hitungIpk(matkul)
+
+                        val nilaiError = ArrayList<ModelMatakuliah>()
+
+                        matkul.forEach { matakuliah ->
+                            if (matakuliah.nilai == "E") {
+                                nilaiError.add(matakuliah)
+                            }
+                        }
+
+                        hitungIpk(nilaiError)
 
                         val viewNilaiMatkulAdapter =
-                            ViewNilaiMatkulAdapter(matkul, user, jumlahSks, ipk)
+                            ViewNilaiMatkulAdapter(nilaiError, user, jumlahSks, ipk)
                         binding.rcNilai.apply {
                             layoutManager = LinearLayoutManager(requireContext())
                             adapter = viewNilaiMatkulAdapter
@@ -120,23 +129,8 @@ class ViewNilaiFragment : Fragment(R.layout.view_nilai_fragment) {
     private fun testExportPdf() {
         binding.mbShare.visibility = View.GONE
         val documentUtils = DocumentUtils(requireActivity())
-//        val bitmap = documentUtils.createBitmapFromLayout(
-//            binding.rootLayout,
-//            binding.rootLayout.width,
-//            binding.rootLayout.height
-//        )
-//        binding.rcNilai.isDrawingCacheEnabled = true
         val bitmap = documentUtils.getScreenshotFromRecyclerView(binding.rcNilai)
-//        val bitmap = documentUtils.getViewBitmap(binding.rcNilai)
-//        if (bitmap != null) {
-//            documentUtils.createPdfFromBitmap(bitmap)
-//            binding.mbShare.visibility = View.VISIBLE
-//        } else {
-//            showToast(requireContext(), "Bitmap not found")
-//        }
-
         bitmap?.let { documentUtils.createPdfFromBitmap(it) }
-//        user.noTeleponOrangtua?.let { showLogAssert("noTeleponOrangtua", it) }
         documentUtils.shareFile(
             requireActivity(),
             user.noTeleponOrangtua, Constant.WHATSAPP_KEY

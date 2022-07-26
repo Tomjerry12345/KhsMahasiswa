@@ -39,6 +39,8 @@ class DetailUserFragment : Fragment(R.layout.detail_user_admin_fragment) {
         }
 
 
+
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

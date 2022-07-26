@@ -27,7 +27,7 @@ class ViewNilaiMatkulAdapter(
         )
     }
 
-    override fun getItemCount(): Int = matkul.size + 1
+    override fun getItemCount(): Int = matkul.size
 
     override fun onBindViewHolder(holder: ViewNilaiMatkulHolder, position: Int) {
         showLogAssert("position", "$position")
@@ -65,15 +65,19 @@ class ViewNilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
             mtvKet.visibility = View.GONE
         }
 
-        if (matkul == null) {
-            mtvMatakuliah.text = "Total sks"
-            mtvSks.text = "$jumlahSks"
-            mtvNilai.text = ipk
-        } else {
-            mtvMatakuliah.text = matkul.matakuliah
-            mtvSks.text = matkul.sks.toString()
-            mtvNilai.text = matkul.nilai
-        }
+        mtvMatakuliah.text = matkul?.matakuliah
+        mtvSks.text = matkul?.sks.toString()
+        mtvNilai.text = matkul?.nilai
+
+//        if (matkul == null) {
+//            mtvMatakuliah.text = "Total sks"
+//            mtvSks.text = "$jumlahSks"
+//            mtvNilai.text = ipk
+//        } else {
+//            mtvMatakuliah.text = matkul.matakuliah
+//            mtvSks.text = matkul.sks.toString()
+//            mtvNilai.text = matkul.nilai
+//        }
     }
 
 }
