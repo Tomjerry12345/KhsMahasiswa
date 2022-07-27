@@ -47,6 +47,8 @@ class ViewNilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val mtvMatakuliah = view.findViewById<MaterialTextView>(R.id.mtvMatakuliah)
     private val mtvSks = view.findViewById<MaterialTextView>(R.id.mtvSks)
     private val mtvNilai = view.findViewById<MaterialTextView>(R.id.mtvNilai)
+    private val mtvNamaDosen = view.findViewById<MaterialTextView>(R.id.mtvNamaDosen)
+    private val mtvnoHp = view.findViewById<MaterialTextView>(R.id.mtvnoHp)
     private val mtvKet = view.findViewById<MaterialCardView>(R.id.keterangan)
 
     @SuppressLint("SetTextI18n")
@@ -68,6 +70,8 @@ class ViewNilaiMatkulHolder(val view: View) : RecyclerView.ViewHolder(view) {
         mtvMatakuliah.text = matkul?.matakuliah
         mtvSks.text = matkul?.sks.toString()
         mtvNilai.text = matkul?.nilai
+        mtvNamaDosen.text = matkul?.namaDosen
+        mtvnoHp.text = matkul?.noHp
 
 //        if (matkul == null) {
 //            mtvMatakuliah.text = "Total sks"

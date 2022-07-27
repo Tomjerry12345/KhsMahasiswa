@@ -8,23 +8,37 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/rootLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.main.admin.viewNilai.ViewNilaiFragment"
-        android:padding="8dp"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rcNilai"
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"
+            android:layout_height="match_parent">
 
-            tools:listitem="@layout/item_view_nilai"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/rootLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.main.admin.viewNilai.ViewNilaiFragment"
+                android:padding="8dp"
+                android:background="@color/white">
 
-<!--        android:layout_marginBottom="64dp"-->
-<!--        android:layout_marginTop="16dp"-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcNilai"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+
+                    tools:listitem="@layout/item_view_nilai"/>
+
+                <!--        android:layout_marginBottom="64dp"-->
+                <!--        android:layout_marginTop="16dp"-->
+
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </HorizontalScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/mbShare"
@@ -34,7 +48,6 @@
             android:contentDescription="Share pdf"
             android:src="@drawable/ic_baseline_share_24"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent" />    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

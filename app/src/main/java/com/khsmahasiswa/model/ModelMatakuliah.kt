@@ -5,5 +5,6 @@ data class ModelMatakuliah(
     val namaDosen: String? = null,
     var nilai: String? = null,
     val sks: Int? = null,
-    val semester: String? = null
+    val semester: String? = null,
+    val noHp: String? = null
 )

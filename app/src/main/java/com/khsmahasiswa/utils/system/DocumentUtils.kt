@@ -114,7 +114,7 @@ class DocumentUtils(val activity: ComponentActivity) {
     fun createPdfFromBitmap(bitmap: Bitmap) {
         val windowManager = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val displayMetrics = DisplayMetrics()
-        activity.windowManager.defaultDisplay.getMetrics(displayMetrics)
+        windowManager.defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
         val height = displayMetrics.heightPixels
 
@@ -122,7 +122,7 @@ class DocumentUtils(val activity: ComponentActivity) {
         showLogAssert("height pdf", "$height")
 
         val pdfDocument = PdfDocument()
-        val pageInfo = PdfDocument.PageInfo.Builder(width, height, 2).create()
+        val pageInfo = PdfDocument.PageInfo.Builder(bitmap.width, bitmap.height, 2).create()
         val page = pdfDocument.startPage(pageInfo)
 
         val canvas = page.canvas
@@ -136,9 +136,9 @@ class DocumentUtils(val activity: ComponentActivity) {
 
         canvas.drawPaint(paint)
 
-        val bitmapNew: Bitmap = Bitmap.createScaledBitmap(bitmap, width, height, true)
+//        val bitmapNew: Bitmap = Bitmap.createScaledBitmap(bitmap, 1000, height, true)
 
-        canvas.drawBitmap(bitmapNew, 0F, 0F, paint)
+        canvas.drawBitmap(bitmap, 0F, 0F, paint)
 
         pdfDocument.finishPage(page)
 

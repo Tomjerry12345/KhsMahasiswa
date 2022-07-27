@@ -47,17 +47,18 @@ class DetailUserViewModel(
     }
 
     private fun showAlertDialog(view: View) {
-        val items = arrayOf("Via sms", "Via whatsapp")
-
-        MaterialAlertDialogBuilder(view.context)
-            .setTitle("Pilih aksi")
-            .setItems(items) { dialog, which ->
-                when(which) {
-                    0 -> viaSms()
-                    1 -> viaWhatsapp(view)
-                }
-            }
-            .show()
+        viaWhatsapp(view)
+//        val items = arrayOf("Via sms", "Via whatsapp")
+//
+//        MaterialAlertDialogBuilder(view.context)
+//            .setTitle("Pilih aksi")
+//            .setItems(items) { dialog, which ->
+//                when(which) {
+//                    0 -> viaSms()
+//                    1 -> viaWhatsapp(view)
+//                }
+//            }
+//            .show()
     }
 
     private fun viaSms() {
